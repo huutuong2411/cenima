@@ -17,11 +17,11 @@ class IsVerifyEmail
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::user()->is_email_verified) {
+        if (!Auth::user()->email_verified_at) {
             auth()->logout();
 
-            return redirect()->route('login')
-                ->with('message', 'Vui lòng xác minh tài khoản bằng liên kết chúng tôi gửi qua email của bạn');
+            return redirect()->route('user.login')
+                ->with('error', __('Vui lòng xác minh tài khoản bằng liên kết chúng tôi gửi qua email của bạn'));
         }
 
         return $next($request);

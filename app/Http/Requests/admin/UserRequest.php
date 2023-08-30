@@ -18,7 +18,7 @@ class UserRequest extends FormRequest
             'phone' => 'required|regex:/^0[0-9]{9}$/',
             'email' => 'required|email',
             'address' => 'required',
-            'password' => 'required|regex:/^(?=(.*[0-9]))(?=.*[!@#$%^&*()\[\]{}\-=~`|:;"\'<>,.\/?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*))[A-Za-z\d!@#$%^&*()\[\]{}\-=~`|:;"\'<>,.\/?]{8,}$/',
+            'password' => 'required|min:6|regex:/^(?=(.*[0-9]))(?=.*[!@#$%^&*()\[\]{}\-=~`|:;"\'<>,.\/?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*))[A-Za-z\d!@#$%^&*()\[\]{}\-=~`|:;"\'<>,.\/?]{8,}$/',
         ];
     }
 

@@ -46,4 +46,9 @@ class UserService
     {
         return $this->userRepository->findOneBy($email);
     }
+
+    public function updateUser($id, $filter)
+    {
+        return $this->userRepository->update($id, $filter);
+    }
 }

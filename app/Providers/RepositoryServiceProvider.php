@@ -9,6 +9,8 @@ use App\Repositories\UserVerifyInterface;
 use App\Repositories\UserVerifyRepository;
 use App\Repositories\PasswordResetInterface;
 use App\Repositories\PasswordResetRepository;
+use App\Repositories\MovieInterface;
+use App\Repositories\MovieRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -24,6 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserInterface::class, UserRepository::class);
         $this->app->bind(UserVerifyInterface::class, UserVerifyRepository::class);
         $this->app->bind(PasswordResetInterface::class, PasswordResetRepository::class);
+        $this->app->bind(MovieInterface::class, MovieRepository::class);
     }
 
     /**

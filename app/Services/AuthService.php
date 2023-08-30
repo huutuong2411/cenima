@@ -44,4 +44,10 @@ class AuthService
     {
         return $this->passwordResetRepository->create($data);
     }
+
+    public function findResetPassword($data)
+    {
+        return $this->passwordResetRepository->findOneBy($data);
+       
+    }
 }

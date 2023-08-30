@@ -2,4 +2,4 @@
 
 Please verify your email to resetpassword with bellow link:
 
-<a href="{{route('user.link_resetpassword', $token) }}">reset password</a>
+    <a href="{{ route('user.link_resetpassword', $token) }}">reset password</a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Services\AuthService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Jobs\SendMailVerify;
 
 class AuthController extends Controller
 {
@@ -80,11 +83,7 @@ class AuthController extends Controller
 
         $this->authService->createUserVerify($dataUserVerify);
 
-        Mail::send('email.verificationEmail', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Xác nhận đăng ký');
-        });
-
+        dispatch(new SendMailVerify($request->email, $token, 'Xác nhận đăng ký', 'email.verificationEmail'));
         return redirect()->route('user.confirm');
     }
 
@@ -92,20 +91,6 @@ class AuthController extends Controller
     {
         return view('auth.confirmEmail');
     }
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function dashboard()
-    {
-        if (Auth::check()) {
-            return view('users');
-        }
-
-        return redirect()->route('user.login')->withSuccess('Opps! You do not have access');
-    }
-
     /**
      * Write code on Method
      *
@@ -150,11 +135,7 @@ class AuthController extends Controller
                 'email' => $email,
                 'token' => $token,
             ]);
-
-            Mail::send('email.reset_password_email', ['token' => $token], function ($message) use ($request) {
-                $message->to($request->email);
-                $message->subject('Thay đổi mật khẩu');
-            });
+            dispatch(new SendMailVerify($email, $token, 'Reset password', 'email.reset_password_email'));
 
             return view('auth.confirmEmail');
         } else {
@@ -162,13 +143,35 @@ class AuthController extends Controller
         }
     }
 
-    // public function verifyPasswordReset($token)
-    // {
-    //     $verifyUser = $this->authService->findToken(['token' => $token]);
-    //     if ($verifyUser) {
-    //         return redirect()->route('login');
-    //     } else {
-    //         return redirect()->route('login')->withErrors('Đổi mật khẩu thất bại');
-    //     }
-    // }
+    public function verifyPasswordReset($token)
+    {
+        $verifyPassword = $this->authService->findResetPassword(['token' => $token]);
+      
+        $id= $this->userService->findbyEmail(['email'=>$verifyPassword->email])->id;
+        $timeDifference = now()->diffInMinutes($verifyPassword->updated_at);
+        if (is_null($verifyPassword)) {
+            return redirect()->route('user.forgotpassword')->withErrors('Link xác thực không hợp lệ');
+        }elseif ($timeDifference > 5){
+            return redirect()->route('user.forgotpassword')->withErrors('Link xác thực hết hạn');
+        }else{
+            return redirect()->route('user.resetpassword',['id'=>$id]);
+        }
+    }
+
+    public function resetpassword($id)
+    {
+        return view('auth.resetpassword',compact('id'));
+    }
+
+    public function updatepassword(ResetPasswordRequest $request , string $id)
+    {
+        // $confirmation_code = time() . uniqid(true);
+        $data['password'] = Hash::make($request->password);
+        // $filter['confirmation_code'] = $confirmation_code;
+        if ($this->userService->updateUser($id, $data)) {
+            return redirect()->route('user.login')->with('success', 'Đổi mật khẩu thành công');
+        } else {
+            return redirect()->route('user.login')->withErrors('Đổi mật khẩu không thành công');
+        }
+    }
 }

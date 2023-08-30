@@ -9,20 +9,25 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendMailForDues implements ShouldQueue
+class SendMailVerify implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data;
-
+    protected $email;
+    protected $token;
+    protected $subject;
+    protected $view;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($email, $token, $subject, $view)
     {
-        $this->data = $data;
+        $this->email = $email;
+        $this->token = $token;
+        $this->subject = $subject;
+        $this->view= $view;
     }
 
     /**
@@ -32,11 +37,9 @@ class SendMailForDues implements ShouldQueue
      */
     public function handle()
     {
-        Mail::send('email.send_mail_for_dues', [
-            'name' => $this->data['name'],
-            'content' => $this->data['content'],
-        ], function ($msg) {
-            $msg->to($this->data['email'], 'HuuTuong')->subject('Email từ huutuong');
+        Mail::send($this->view, ['token' => $this->token], function ($message) {
+            $message->to($this->email);
+            $message->subject($this->subject);
         });
     }
 }

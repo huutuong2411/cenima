@@ -15,8 +15,13 @@
                     <button><i class="icofont icofont-search"></i></button>
                 </form>
                 <ul>
-                    <li><a href="#">Welcome Guest!</a></li>
+                    @if(!Auth::check())
+                    <li><a href="#">[Khách!]</a></li>
                     <li><a class="" href="{{route('user.login')}}">Login</a></li>
+                    @else
+                    <li><a href="#">{{Auth::user()->name}}</a></li>
+                    <li><a class="" href="{{route('user.login')}}">LogOut</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="menu-area">
