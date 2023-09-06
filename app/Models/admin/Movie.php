@@ -12,4 +12,23 @@ class Movie extends Model
     use softDeletes;
 
     protected $table = 'movie';
+
+    public function Categories()
+    {
+        return $this->belongsTo('App\Models\admin\Categories', 'id_category');
+    }
+
+    protected $fillable = [
+        'id',
+        'name',
+        'start_date',
+        'trailer',
+        'image',
+        'age_limit',
+        'time',
+        'description',
+        'price',
+        'id_category',
+        'user_id'
+    ];
 }

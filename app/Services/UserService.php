@@ -51,4 +51,14 @@ class UserService
     {
         return $this->userRepository->update($id, $filter);
     }
+
+    public function pluckNotNull($column)
+    {
+        return $this->userRepository->findOneByNotNull($column)->pluck($column);
+    }
+
+    // public function createToken($user, $name) hàm này để làm passport
+    // {
+    //     return $this->userRepository->createToken($user, $name);
+    // }
 }

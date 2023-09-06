@@ -68,8 +68,8 @@ abstract class BaseRepository implements RepositoryInterface
     public function update($id, $attributes = [])
     {
         $record = $this->find($id);
-
-        return $record->update($attributes);
+        $record->update($attributes);
+        return $record;
     }
 
     /**
@@ -176,6 +176,16 @@ abstract class BaseRepository implements RepositoryInterface
         return $data ?: null;
     }
 
+    //custom
+    public function findOneByNotNull($column)
+    {
+        $builder = $this->model->newQuery();
+        $builder->whereNotNull($column);
+
+        $data = $builder->first();
+
+        return $data ?: null;
+    }
     /**
      * paginate
      *

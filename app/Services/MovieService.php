@@ -22,4 +22,8 @@ class MovieService
         return $this->movieRepository->all();
     }
 
+    public function createMovie($data)
+    {
+        return $this->movieRepository->create($data);
+    }
 }

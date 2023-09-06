@@ -92,4 +92,6 @@ interface RepositoryInterface
      * @return LengthAwarePaginator|mixed
      */
     public function paginate($page);
+
+    public function findOneByNotNull($column);
 }

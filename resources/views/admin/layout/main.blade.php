@@ -13,9 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{asset('admin/assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
@@ -27,49 +25,54 @@
     <!-- viết jquery add class active -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    
-    <script type="text/javascript">
-    $(document).ready(function() {
-        
-        $('table.display').dataTable( {
-            "aLengthMenu": [[5,10,20,50,-1], [5,10,20,50, "All"]],
-            "pageLength": 5,
-            "language": {
-            "lengthMenu": "Hiển thị _MENU_ hàng",
-            "zeroRecords": "Không tìm thấy hàng nào",
-            "info": "Trang _PAGE_ của _PAGES_",
-            "infoEmpty": "Không tìm thấy hàng nào",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-           "search":         "Tìm kiếm:",
-           "paginate": {
-                    "first":      "First",
-                    "last":       "Last",
-                    "next":       ">",
-                    "previous":   "<"
-                },
-            },
-            } );
-        $('#dataTable').dataTable( {
-            "aLengthMenu": [[5,10,20,50,-1], [5,10,20,50, "All"]],
-            "pageLength": 5,
-            "language": {
-            "lengthMenu": "Hiển thị _MENU_ hàng",
-            "zeroRecords": "Không tìm thấy hàng nào",
-            "info": "Trang _PAGE_ của _PAGES_",
-            "infoEmpty": "Không tìm thấy hàng nào",
-            "infoFiltered": "(filtered from _MAX_ total records)",
-           "search":         "Tìm kiếm:",
-           "paginate": {
-                    "first":      "First",
-                    "last":       "Last",
-                    "next":       ">",
-                    "previous":   "<"
-                },
-            },
-            } );
-        
-        });
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('table.display').dataTable({
+                "aLengthMenu": [
+                    [5, 10, 20, 50, -1],
+                    [5, 10, 20, 50, "All"]
+                ],
+                "pageLength": 5,
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ hàng",
+                    "zeroRecords": "Không tìm thấy hàng nào",
+                    "info": "Trang _PAGE_ của _PAGES_",
+                    "infoEmpty": "Không tìm thấy hàng nào",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": ">",
+                        "previous": "<"
+                    },
+                },
+            });
+            $('#dataTable').dataTable({
+                "aLengthMenu": [
+                    [5, 10, 20, 50, -1],
+                    [5, 10, 20, 50, "All"]
+                ],
+                "pageLength": 5,
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ hàng",
+                    "zeroRecords": "Không tìm thấy hàng nào",
+                    "info": "Trang _PAGE_ của _PAGES_",
+                    "infoEmpty": "Không tìm thấy hàng nào",
+                    "infoFiltered": "(filtered from _MAX_ total records)",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": ">",
+                        "previous": "<"
+                    },
+                },
+            });
+
+        });
     </script>
 </head>
 
@@ -87,7 +90,7 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- navbar content -->
-                 @include('Admin.layout.header')
+                @include('Admin.layout.header')
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -99,7 +102,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            
+
             <!-- End of Footer -->
 
         </div>
@@ -114,8 +117,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -127,7 +129,7 @@
                 <div class="modal-body">Chọn "Đăng xuất" nếu bạn muốn kết thúc phiên đăng nhập</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="">Đăng Xuất</a>
+                    <a class="btn btn-primary" href="{{route('admin.logout')}}">Đăng Xuất</a>
                 </div>
             </div>
         </div>
@@ -152,12 +154,8 @@
     <script src="{{asset('admin/assets/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('admin/assets/js/demo/chart-pie-demo.js')}}"></script>
     <script src="{{asset('admin/assets/js/demo/chart-bar-demo.js')}}"></script>
-    <script src="{{asset('admin/assets/js/demo/datatables-demo.js')}}"></script> 
-   
+    <script src="{{asset('admin/assets/js/demo/datatables-demo.js')}}"></script>
+
 </body>
 
 </html>
-
-
-
-

@@ -10,4 +10,6 @@ interface UserInterface extends RepositoryInterface
     public function getUsers($filter);
 
     public function createUser($filter);
+
+    // public function createToken($user, $name); hàm này để làm passport
 }

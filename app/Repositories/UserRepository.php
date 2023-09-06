@@ -49,4 +49,16 @@ class UserRepository extends BaseRepository implements UserInterface
 
         return $data;
     }
+
+    // public function createToken($user, $name) hàm này để làm passport
+    // {
+    //     $factory = app(PersonalAccessTokenFactory::class);
+
+    //     $token = $factory->make(
+    //         $user, // Đối tượng người dùng
+    //         $name // Tên của access token
+    //     );
+
+    //     return $token;
+    // }
 }

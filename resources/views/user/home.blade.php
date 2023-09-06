@@ -58,7 +58,7 @@
                          </div>
                          <div class="slide-trailor">
                              <h3>Watch Trailer</h3>
-                             <a class="theme-btn" href="#"><i class="icofont icofont-ticket"></i> Mua vé</a>
+                             <a class="theme-btn" href="{{ route('admin.send_web_notification') }}"><i class="icofont icofont-ticket"></i> Mua vé</a>
                          </div>
                      </div>
                  </div>

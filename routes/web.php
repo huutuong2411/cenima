@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\admin\AuthAdminController;
 use App\Http\Controllers\admin\AdminHomeController;
 use App\Http\Controllers\admin\AdminMovieController;
+use App\Http\Controllers\NotificationSendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +54,23 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {
+    Route::get("/home", function () {
+        return view("admin.home");
+    });
+
+    Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store.token');
+    Route::get('/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send_web_notification');
+
+    Route::get('/login', [AuthAdminController::class, 'index'])->name('login');
+    Route::post('/login', [AuthAdminController::class, 'login'])->name('login.post');
+    Route::get('/logout', [AuthAdminController::class, 'logout'])->name('logout');
+
     Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard'); //snake_case;
     Route::group([
         'prefix' => 'movie',
     ], function () {
         Route::get('/', [AdminMovieController::class, 'index'])->name('movie');
+        Route::get('/add', [AdminMovieController::class, 'create'])->name('create_movie');
+        Route::post('/store', [AdminMovieController::class, 'store'])->name('store_movie');
     });
 });
