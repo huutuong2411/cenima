@@ -29,7 +29,7 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="{{Request::is('admin/category*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL rạp chiếu</a>
+                <a class="{{Request::is('admin/theaters*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.theaters')}}">QL rạp chiếu</a>
                 <a class="{{Request::is('admin/brand*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL giờ chiếu</a>
                 <a class="{{Request::is('admin/product*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL ghế ngồi</a>
                 <a class="{{Request::is('admin/size*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL giá vé</a>
@@ -46,7 +46,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="{{Request::is('admin/movie*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.movie')}}">QL phim</a>
-                <a class="{{Request::is('admin/purchase*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL diễn viên</a>
+                <a class="{{Request::is('admin/categories*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.categories')}}">QL danh mục</a>
                 <a class="{{Request::is('admin/purchase*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL bài viết</a>
             </div>
         </div>

@@ -14,6 +14,8 @@ use App\Repositories\MovieRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\CategoriesInterface;
 use App\Repositories\CategoriesRepository;
+use App\Repositories\TheatersInterface;
+use App\Repositories\TheatersRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PasswordResetInterface::class, PasswordResetRepository::class);
         $this->app->bind(MovieInterface::class, MovieRepository::class);
         $this->app->bind(CategoriesInterface::class, CategoriesRepository::class);
+        $this->app->bind(TheatersInterface::class, TheatersRepository::class);
     }
 
     /**

@@ -32,7 +32,7 @@ Thống kê - Báo Cáo
     <div class="card">
         <div class="card-header text-primary font-weight-bold">Danh sách phim<a href="" class="btn btn-danger" style="float:right; margin-left:1%"><i class="fas fa-trash"></i> Thùng rác</a>
 
-            <a style="float:right" href="{{route('admin.createmovie')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm phim</a>
+            <a style="float:right" href="{{route('admin.create_movie')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm phim</a>
 
         </div>
         <div class="card-body">

@@ -10,7 +10,8 @@ use App\Http\Controllers\admin\AuthAdminController;
 use App\Http\Controllers\admin\AdminHomeController;
 use App\Http\Controllers\admin\AdminMovieController;
 use App\Http\Controllers\NotificationSendController;
-
+use App\Http\Controllers\admin\AdminCategoriesController;
+use App\Http\Controllers\admin\AdminTheatersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +67,31 @@ Route::group([
     Route::get('/logout', [AuthAdminController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard'); //snake_case;
+    
+   //categories
+   Route::group([
+        'prefix' => 'categories',
+    ], function () {
+        Route::get('/', [AdminCategoriesController::class, 'index'])->name('categories');
+        Route::post('/', [AdminCategoriesController::class, 'store'])->name('categories_add');
+        Route::post('/{id}', [AdminCategoriesController::class, 'update'])->name('categories_edit');
+        Route::get('/{id}/delete', [AdminCategoriesController::class, 'destroy'])->name('categories_delete');
+        Route::get('/trash', [AdminCategoriesController::class, 'trash'])->name('trash_categories');
+        Route::get('/{id}/restore', [AdminCategoriesController::class, 'restore'])->name('categories_restore');
+    });
+
+   //theaters
+   Route::group([
+        'prefix' => 'theaters',
+    ], function () {
+        Route::get('/', [AdminTheatersController::class, 'index'])->name('theaters');
+        Route::post('/', [AdminTheatersController::class, 'store'])->name('theaters_add');
+        Route::post('/{id}', [AdminTheatersController::class, 'update'])->name('theaters_edit');
+        Route::get('/{id}/delete', [AdminTheatersController::class, 'destroy'])->name('theaters_delete');
+        Route::get('/trash', [AdminTheatersController::class, 'trash'])->name('theaters_trash');
+        Route::get('/{id}/restore', [AdminTheatersController::class, 'restore'])->name('theaters_restore');
+    });
+   //movie
     Route::group([
         'prefix' => 'movie',
     ], function () {
