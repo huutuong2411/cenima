@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\AdminMovieController;
 use App\Http\Controllers\NotificationSendController;
 use App\Http\Controllers\admin\AdminCategoriesController;
 use App\Http\Controllers\admin\AdminTheatersController;
+use App\Http\Controllers\admin\AdminRoomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,9 +68,9 @@ Route::group([
     Route::get('/logout', [AuthAdminController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard'); //snake_case;
-    
-   //categories
-   Route::group([
+
+    //categories
+    Route::group([
         'prefix' => 'categories',
     ], function () {
         Route::get('/', [AdminCategoriesController::class, 'index'])->name('categories');
@@ -80,8 +81,8 @@ Route::group([
         Route::get('/{id}/restore', [AdminCategoriesController::class, 'restore'])->name('categories_restore');
     });
 
-   //theaters
-   Route::group([
+    //theaters
+    Route::group([
         'prefix' => 'theaters',
     ], function () {
         Route::get('/', [AdminTheatersController::class, 'index'])->name('theaters');
@@ -91,7 +92,21 @@ Route::group([
         Route::get('/trash', [AdminTheatersController::class, 'trash'])->name('theaters_trash');
         Route::get('/{id}/restore', [AdminTheatersController::class, 'restore'])->name('theaters_restore');
     });
-   //movie
+
+    //rooms
+    Route::group([
+        'prefix' => 'rooms',
+    ], function () {
+        Route::get('/', [AdminRoomController::class, 'index'])->name('rooms');
+        // Route::post('/', [AdminRoomsController::class, 'store'])->name('theaters_add');
+        // Route::post('/{id}', [AdminRoomsController::class, 'update'])->name('theaters_edit');
+        // Route::get('/{id}/delete', [AdminRoomsController::class, 'destroy'])->name('theaters_delete');
+        // Route::get('/trash', [AdminRoomsController::class, 'trash'])->name('theaters_trash');
+        // Route::get('/{id}/restore', [AdminRoomsController::class, 'restore'])->name('theaters_restore');
+    });
+
+
+    //movie
     Route::group([
         'prefix' => 'movie',
     ], function () {

@@ -10,17 +10,17 @@ use Illuminate\Support\Facades\Auth;
 class AdminCategoriesController extends Controller
 {
     protected CategoriesService $categoriesService;
-    
+
     public function __construct(CategoriesService $categoriesService)
     {
-      
+
         $this->categoriesService = $categoriesService;
     }
 
     public function index()
     {
         $categories = $this->categoriesService->getAll();
-        return view('admin.categories.categories',compact('categories'));
+        return view('admin.categories.categories', compact('categories'));
     }
 
     /**
@@ -41,14 +41,14 @@ class AdminCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-         $data = [
+        $data = [
             'name' => $request->category,
-            'user_id'=> Auth::user()->id,
+            'user_id' => Auth::user()->id,
         ];
-        if($this->categoriesService->createCategory($data)){
-            return redirect()->back()->with('success',__('Thêm danh mục thành công')); 
+        if ($this->categoriesService->createCategory($data)) {
+            return redirect()->back()->with('success', __('Thêm danh mục thành công'));
         } else {
-            return redirect()->back()->withErrors('Thêm danh mục không thành công');
+            return redirect()->back()->with('error', __('Thêm danh mục không thành công'));
         }
     }
 
@@ -83,13 +83,13 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $data = [
+        $data = [
             'name' => $request->new_name,
         ];
-        if( $category = $this->categoriesService->updateCategory($id,$data)){
-            return redirect()->back()->with('success',__('Sửa danh mục thành công')); 
+        if ($this->categoriesService->updateCategory($id, $data)) {
+            return redirect()->back()->with('success', __('Sửa danh mục thành công'));
         } else {
-            return redirect()->back()->withErrors('Sửa danh mục không thành công');
+            return redirect()->back()->with('error', __('Sửa danh mục không thành công'));
         }
     }
 
@@ -102,8 +102,7 @@ class AdminCategoriesController extends Controller
     public function destroy($id)
     {
         $this->categoriesService->deleteCategory($id);
-        dd('alo');
-        return redirect()->back()->with('delete',__('Đã xoá danh mục thành công'));
+        return redirect()->back()->with('delete', __('Đã xoá danh mục thành công'));
     }
     // thùng rác
     // public function trash()

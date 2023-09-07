@@ -6,22 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Theaters extends Model
+class Seats extends Model
 {
     use HasFactory;
-    use softDeletes;
+    use SoftDeletes;
 
-    protected $table = 'theaters';
+    protected $table = 'seats';
 
     protected $fillable = [
         'name',
-        'address',
-        'id_city',
+        'id_row',
+        'id_column',
         'user_id',
     ];
-
-    public function Rooms()
-    {
-        return $this->hasMany('App\Models\admin\Rooms', 'id_theater');
-    }
 }

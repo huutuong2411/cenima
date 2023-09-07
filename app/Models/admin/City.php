@@ -10,4 +10,9 @@ class City extends Model
     use HasFactory;
 
     protected $table = 'city';
+
+    public function Theaters()
+    {
+        return $this->hasMany('App\Models\admin\Theaters', 'id_city');
+    }
 }

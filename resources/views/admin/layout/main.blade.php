@@ -19,16 +19,37 @@
     <link href="{{asset('admin/assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="{{asset('admin/assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
     <link rel="icon" href="{{asset('logo_chot.ico')}}" type="image/x-icon">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- viết jquery add class active -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
+    <link rel="stylesheet" href="https://www.jqueryscript.net/demo/Simple-Flexible-jQuery-Alert-Notification-Plugin-notify-js/css/notify.css">
     <script type="text/javascript">
         $(document).ready(function() {
+            var success = "{{session('success')}}"
+            var error = "{{session('error')}}"
+            var deleted = "{{session('delete')}}"
+            if (success) {
+                $.notify(success, {
+                    color: "#fff",
+                    background: "#20D67B"
+                });
+            }
 
+            if (error) {
+                $.notify(error, {
+                    color: "#fff",
+                    background: "#D44950"
+                });
+            }
+
+            if (deleted) {
+                $.notify(deleted, {
+                    color: "#fff",
+                    background: "#A5881B"
+                });
+            }
             $('table.display').dataTable({
                 "aLengthMenu": [
                     [5, 10, 20, 50, -1],
@@ -155,6 +176,8 @@
     <script src="{{asset('admin/assets/js/demo/chart-pie-demo.js')}}"></script>
     <script src="{{asset('admin/assets/js/demo/chart-bar-demo.js')}}"></script>
     <script src="{{asset('admin/assets/js/demo/datatables-demo.js')}}"></script>
+    <script src="https://www.jqueryscript.net/demo/Simple-Flexible-jQuery-Alert-Notification-Plugin-notify-js/js/notify.js"></script>
+
 
 </body>
 

@@ -30,9 +30,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="{{Request::is('admin/theaters*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.theaters')}}">QL rạp chiếu</a>
-                <a class="{{Request::is('admin/brand*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL giờ chiếu</a>
-                <a class="{{Request::is('admin/product*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL ghế ngồi</a>
-                <a class="{{Request::is('admin/size*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL giá vé</a>
+                <a class="{{Request::is('admin/brand*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL suất chiếu</a>
+                <a class="{{Request::is('admin/product*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL phòng chiếu</a>
             </div>
         </div>
     </li>

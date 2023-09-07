@@ -16,6 +16,14 @@ use App\Repositories\CategoriesInterface;
 use App\Repositories\CategoriesRepository;
 use App\Repositories\TheatersInterface;
 use App\Repositories\TheatersRepository;
+use App\Repositories\RoomsInterface;
+use App\Repositories\RoomsRepository;
+use App\Repositories\RowInterface;
+use App\Repositories\RowRepository;
+use App\Repositories\ColumnInterface;
+use App\Repositories\ColumnRepository;
+use App\Repositories\SeatsInterface;
+use App\Repositories\SeatsRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -33,6 +41,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(MovieInterface::class, MovieRepository::class);
         $this->app->bind(CategoriesInterface::class, CategoriesRepository::class);
         $this->app->bind(TheatersInterface::class, TheatersRepository::class);
+        $this->app->bind(RoomsInterface::class, RoomsRepository::class);
+        $this->app->bind(RowInterface::class, RowRepository::class);
+        $this->app->bind(ColumnInterface::class, ColumnRepository::class);
+        $this->app->bind(SeatsInterface::class, SeatsRepository::class);
     }
 
     /**
