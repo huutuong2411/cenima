@@ -24,6 +24,8 @@ use App\Repositories\ColumnInterface;
 use App\Repositories\ColumnRepository;
 use App\Repositories\SeatsInterface;
 use App\Repositories\SeatsRepository;
+use App\Repositories\CitiesInterface;
+use App\Repositories\CitiesRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -45,6 +47,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RowInterface::class, RowRepository::class);
         $this->app->bind(ColumnInterface::class, ColumnRepository::class);
         $this->app->bind(SeatsInterface::class, SeatsRepository::class);
+         $this->app->bind(CitiesInterface::class, CitiesRepository::class);
     }
 
     /**

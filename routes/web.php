@@ -12,7 +12,7 @@ use App\Http\Controllers\admin\AdminMovieController;
 use App\Http\Controllers\NotificationSendController;
 use App\Http\Controllers\admin\AdminCategoriesController;
 use App\Http\Controllers\admin\AdminTheatersController;
-use App\Http\Controllers\admin\AdminRoomController;
+use App\Http\Controllers\admin\AdminRoomsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,8 +97,9 @@ Route::group([
     Route::group([
         'prefix' => 'rooms',
     ], function () {
-        Route::get('/', [AdminRoomController::class, 'index'])->name('rooms');
-        // Route::post('/', [AdminRoomsController::class, 'store'])->name('theaters_add');
+        Route::get('/', [AdminRoomsController::class, 'index'])->name('rooms');
+        Route::get('/create', [AdminRoomsController::class, 'create'])->name('rooms_create');
+        Route::post('/', [AdminRoomsController::class, 'store'])->name('rooms_add');
         // Route::post('/{id}', [AdminRoomsController::class, 'update'])->name('theaters_edit');
         // Route::get('/{id}/delete', [AdminRoomsController::class, 'destroy'])->name('theaters_delete');
         // Route::get('/trash', [AdminRoomsController::class, 'trash'])->name('theaters_trash');

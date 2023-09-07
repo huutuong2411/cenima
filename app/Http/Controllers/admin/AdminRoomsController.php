@@ -5,17 +5,29 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\City;
+use App\Services\RoomsService;
+use App\Services\TheatersService;
+use App\Services\CitiesService; 
 
-class AdminRoomController extends Controller
+class AdminRoomsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected RoomsService $roomsService ;
+    protected TheatersService $theatersService;
+    protected CitiesService $citiesService;
+
+    public function __construct(RoomsService $roomsService, TheatersService $theatersService, CitiesService $citiesService)
+    {
+
+        $this->roomsService = $roomsService;
+        $this->theatersService = $theatersService;
+         $this->citiesService = $citiesService;
+    }
+
     public function index()
     {
-        //
+        $rooms = $this->roomsService->getAll();
+
+       return view('admin.rooms.rooms',compact('rooms'));
     }
 
     /**
@@ -25,7 +37,9 @@ class AdminRoomController extends Controller
      */
     public function create()
     {
-        //
+          $city = $this->citiesService->getAll();
+       
+        return view('admin.rooms.add', compact('city'));
     }
 
     /**
@@ -36,7 +50,13 @@ class AdminRoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //call ajax city -> theaters
+        if(!empty($request->id_city)){
+        $theaters= $this->citiesService->findCity($request->id_city)->theaters;
+        return response()->json($theaters);
+        }
+        dd($request);
     }
 
     /**

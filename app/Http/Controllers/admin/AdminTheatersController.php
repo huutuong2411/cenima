@@ -7,20 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\admin\City;
 use App\Services\TheatersService;
+use App\Services\CitiesService;
 
 class AdminTheatersController extends Controller
 {
     protected TheatersService $theatersService;
+    protected CitiesService $citiesService;
+    
 
-    public function __construct(TheatersService $theatersService)
+    public function __construct(TheatersService $theatersService, CitiesService $citiesService)
     {
 
         $this->theatersService = $theatersService;
+        $this->citiesService = $citiesService;
     }
 
     public function index()
     {
-        $city = City::all();
+        $city = $this->citiesService->getAll();
         $theaters = $this->theatersService->getAll();
         return view('admin.theaters.theaters', compact('theaters', 'city'));
     }
