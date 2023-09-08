@@ -6,7 +6,7 @@ Quản lý rạp phim
 
 @section('content')
 
-<h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Quản lý nhãn hàng</h1>
+<h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Quản lý rạp chiếu</h1>
 <div class="card shadow mb-4">
 
   <div class="row">

@@ -15,7 +15,7 @@ class AuthRequest extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&"*()\-_=+{};:,<.>]).{6,255}+$/',
         ];
     }
@@ -28,7 +28,8 @@ class AuthRequest extends FormRequest
             'email' => ':attribute Phải là dạng email',
             'min' => ':attribute có ít nhất :min ký tự',
             'confirmed' => 'nhập lại :attribute không đúng',
-            'regex'=>':attribute phải chứa ký tự In Hoa và ký tự đặc biệt'
+            'regex' => ':attribute phải chứa ký tự In Hoa và ký tự đặc biệt',
+            'unique' => 'email đã tồn tại'
         ];
     }
 

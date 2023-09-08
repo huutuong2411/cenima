@@ -1,12 +1,12 @@
 @extends('Admin.layout.main')
 
 @section('title')
-Thêm phòng chiếu
+Sửa phòng chiếu {{$room->name}}
 @endsection
 
 @section('content')
 
-<h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Thêm phòng chiếu<a style="float:right;" href="{{route('admin.rooms')}}" class="btn btn-danger col-1"><i class="fas fa-sharp fa-solid fa-arrow-left"></i> Quay lại</a></h1>
+<h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Sửa phòng chiếu<a style="float:right;" href="{{route('admin.rooms')}}" class="btn btn-danger col-1"><i class="fas fa-sharp fa-solid fa-arrow-left"></i> Quay lại</a></h1>
 <div class="card shadow mb-4">
 
 
@@ -20,12 +20,12 @@ Thêm phòng chiếu
     </div>
     @endif
 
-    <form action="{{route('admin.rooms_add')}}" method="post" enctype="multipart/form-data" id="form">
+    <form action="{{route('admin.rooms_update',['id'=>$room->id])}}" method="post">
         @csrf
 
         <!-- Account details card-->
         <div class="card mb-4">
-            <div class="card-header text-primary font-weight-bold">Thông tin phòng chiếu</div>
+            <div class="card-header text-primary font-weight-bold">Phòng chiếu {{$room->name}}</div>
             <div class="card-body">
                 <div class="receipt">
                     <div class="mb-3 row">
@@ -33,8 +33,8 @@ Thêm phòng chiếu
                             <label class="text-primary">Chọn thành phố: </label>
                             <select required class="form-select form-control" name="city" id="city">
                                 <option value="">--Chọn--</option>
-                                @foreach($city as $value)
-                                <option value="{{$value->id}}">{{$value->name}}</option>
+                                @foreach($cities as $value)
+                                <option {{$value->id==$room->Theaters->Cities->id? 'selected':''}} value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -42,26 +42,32 @@ Thêm phòng chiếu
                             <label class="text-primary">Chọn rạp: </label>
                             <select required class="form-select form-control" name="theaters" id="theaters">
                                 <option value="">--Chọn--</option>
-
+                                @foreach($theaters as $value)
+                                <option {{$value->id==$room->Theaters->id? 'selected':''}} value="{{$value->id}}">{{$value->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-2">
                             <label class="text-primary">Tên phòng: </label>
-                            <input required name="name" class="form-control price" type="text" placeholder="Nhập tên phòng chiếu">
+                            <input required name="name" class="form-control price" type="text" placeholder="Nhập tên phòng chiếu" value="{{$room->name}}">
                         </div>
                         <div class="col-2">
                             <label class="text-primary">Tổng số ghế: </label>
-                            <input readonly id="total_seat" name="total_seats" class="form-control" type="text">
+                            <input readonly id="total_seat" name="total_seats" class="form-control" type="text" value="{{$room->seat_qty}}">
                         </div>
                     </div>
                     <hr class="primary">
                     <label class="text-primary">Sơ đồ ghế ngồi: </label>
+                    @foreach(json_decode($room->seats) as $row => $value)
                     <div class="card border-left-info addrow">
                         <div class="card-body row p-2" style="padding: 0.7rem;">
                             <div class="col-1">
-                                <a href="#" class="btn btn-info btn-circle btn-sm rowChar">A</a>
+                                <a href="#" class="btn btn-info btn-circle btn-sm rowChar">{{$row}}</a>
                             </div>
                             <div class="col-8 rowSeat border border-info rounded">
+                                @foreach($value as $seat)
+                                <button type="button" class='btn btn-secondary btn-sm ml-1'>{{$seat}}<input type='hidden' name='seats[{{$row}}][]' value='{{$seat}}'></button>
+                                @endforeach
                             </div>
                             <div class="col-1">
                                 <button class="btn btn-warning btn-icon-split addSeat" type="button">Thêm ghế</button>
@@ -75,6 +81,7 @@ Thêm phòng chiếu
 
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 <hr>
                 <button class="btn btn-success buttonadd" type="button">Thêm hàng</button>

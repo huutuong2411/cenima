@@ -1,7 +1,7 @@
 @extends('Admin.layout.main')
 
 @section('title')
-Thêm sản phẩm
+Thêm phim
 @endsection
 
 @section('content')
@@ -9,18 +9,7 @@ Thêm sản phẩm
 <h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Thêm phim<a style="float:right;" href="{{route('admin.movie')}}" class="btn btn-danger col-1"><i class="fas fa-sharp fa-solid fa-arrow-left"></i> Quay lại</a></h1>
 <div class="card shadow mb-4">
 
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    <form action="{{route('admin.storemovie')}}" method="post" enctype="multipart/form-data" id="form">
+    <form action="{{route('admin.store_movie')}}" method="post" enctype="multipart/form-data" id="form">
         @csrf
 
         <!-- Account details card-->
@@ -58,7 +47,6 @@ Thêm sản phẩm
                     </select>
                 </div>
                 <div class="mb-3 row">
-
                     <div class="col-3">
                         <label class="text-primary">Chọn ngày khởi chiếu: </label>
                         <input required name="start_date" class="form-control" type="date">
@@ -66,10 +54,6 @@ Thêm sản phẩm
                     <div class="col-3">
                         <label class="text-primary">Thời lượng: (phút)</label>
                         <input id="total_payment" name="time" class="form-control" type="number">
-                    </div>
-                    <div class="col-2">
-                        <label class="text-primary">Giá vé: </label>
-                        <input id="total_payment" name="price" class="form-control" type="text">
                     </div>
                 </div>
                 <div class="mb-3">
@@ -94,8 +78,7 @@ Thêm sản phẩm
             console.error(error);
         });
 </script>
-
-
+<!-- xử lý pre hình ảnh -->
 <script type="text/javascript">
     $(document).ready(function() {
         $('#photo').change(function() {

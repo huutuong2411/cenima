@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\MovieService;
 use App\Services\CategoriesService;
-// use Image;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 
 class AdminMovieController extends Controller
@@ -51,8 +51,8 @@ class AdminMovieController extends Controller
             $path = public_path('admin/assets/img/movies/' . $name);
             if (!is_dir('admin/assets/img/movies')) {
                 mkdir('admin/assets/img/movies');
-                // Image::make($image->getrealpath())->resize(524, 724)->save($path);
             }
+            Image::make($image->getrealpath())->resize(524, 724)->save($path);
             $data['image'] = $name;
         }
         $data['user_id'] = Auth::user()->id;

@@ -195,4 +195,14 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $this->query->paginate($page);
     }
+
+    public function onlyTrashed()
+    {
+        return $this->model->onlyTrashed()->get();
+    }
+
+    public function restore($id)
+    {
+        return $this->model->withTrashed()->find($id)->restore();
+    }
 }

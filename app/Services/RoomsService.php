@@ -40,4 +40,24 @@ class RoomsService
     {
         return $this->roomsRepository->delete($id);
     }
+
+    public function withTheater()
+    {
+        return $this->roomsRepository->with(['Theaters.Cities']);
+    }
+
+    public function findRoom($id)
+    {
+        return $this->roomsRepository->find($id);
+    }
+
+    public function roomTrash()
+    {
+        return $this->roomsRepository->onlyTrashed();
+    }
+
+    public function restoreRoom($id)
+    {
+        return $this->roomsRepository->restore($id);
+    }
 }

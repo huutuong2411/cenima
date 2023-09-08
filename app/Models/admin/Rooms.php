@@ -17,6 +17,7 @@ class Rooms extends Model
         'name',
         'id_theater',
         'seat_qty',
+        'seats',
         'user_id',
     ];
 
@@ -28,5 +29,10 @@ class Rooms extends Model
     public function Columns()
     {
         return $this->hasMany('App\Models\admin\Columns', 'id_room');
+    }
+
+    public function Theaters()
+    {
+        return $this->belongsTo('App\Models\admin\Theaters', 'id_theater');
     }
 }

@@ -24,4 +24,9 @@ class Theaters extends Model
     {
         return $this->hasMany('App\Models\admin\Rooms', 'id_theater');
     }
+
+    public function Cities()
+    {
+        return $this->belongsTo('App\Models\admin\City', 'id_city');
+    }
 }

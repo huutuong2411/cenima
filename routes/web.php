@@ -97,22 +97,23 @@ Route::group([
     Route::group([
         'prefix' => 'rooms',
     ], function () {
+
         Route::get('/', [AdminRoomsController::class, 'index'])->name('rooms');
         Route::get('/create', [AdminRoomsController::class, 'create'])->name('rooms_create');
+        Route::get('/trash', [AdminRoomsController::class, 'trash'])->name('rooms_trash');
         Route::post('/', [AdminRoomsController::class, 'store'])->name('rooms_add');
-        // Route::post('/{id}', [AdminRoomsController::class, 'update'])->name('theaters_edit');
-        // Route::get('/{id}/delete', [AdminRoomsController::class, 'destroy'])->name('theaters_delete');
-        // Route::get('/trash', [AdminRoomsController::class, 'trash'])->name('theaters_trash');
-        // Route::get('/{id}/restore', [AdminRoomsController::class, 'restore'])->name('theaters_restore');
+        Route::get('/{id}', [AdminRoomsController::class, 'show'])->name('rooms_show');
+        Route::get('/{id}/edit', [AdminRoomsController::class, 'edit'])->name('rooms_edit');
+        Route::post('/{id}', [AdminRoomsController::class, 'update'])->name('rooms_update');
+        Route::get('/{id}/delete', [AdminRoomsController::class, 'destroy'])->name('rooms_delete');
+        Route::get('/{id}/restore', [AdminRoomsController::class, 'restore'])->name('rooms_restore');
     });
-
-
     //movie
     Route::group([
         'prefix' => 'movie',
     ], function () {
         Route::get('/', [AdminMovieController::class, 'index'])->name('movie');
-        Route::get('/add', [AdminMovieController::class, 'create'])->name('create_movie');
-        Route::post('/store', [AdminMovieController::class, 'store'])->name('store_movie');
+        Route::get('/create', [AdminMovieController::class, 'create'])->name('create_movie');
+        Route::post('/', [AdminMovieController::class, 'store'])->name('store_movie');
     });
 });

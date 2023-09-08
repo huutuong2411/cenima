@@ -27,7 +27,6 @@ class Movie extends Model
         'age_limit',
         'time',
         'description',
-        'price',
         'id_category',
         'user_id'
     ];

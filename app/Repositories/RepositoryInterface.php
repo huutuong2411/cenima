@@ -94,4 +94,10 @@ interface RepositoryInterface
     public function paginate($page);
 
     public function findOneByNotNull($column);
+
+    public function with($relations);
+
+    public function onlyTrashed();
+
+    public function restore($id);
 }
