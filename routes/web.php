@@ -4,12 +4,14 @@ use App\Http\Controllers\admin\AdminCategoriesController;
 use App\Http\Controllers\admin\AdminHomeController;
 use App\Http\Controllers\admin\AdminMovieController;
 use App\Http\Controllers\admin\AdminRoomsController;
+use App\Http\Controllers\admin\AdminShowTimeController;
 use App\Http\Controllers\admin\AdminTheatersController;
 use App\Http\Controllers\admin\AuthAdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationSendController;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\MovieController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,12 +25,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::group([
     'prefix' => '',
     'as' => 'user.',
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home'); //snake_case;
+    Route::get('/{id}', [MovieController::class, 'show'])->name('movie_show');
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('post-login', [AuthController::class, 'postLogin'])->name('login_post');
     Route::get('register', [AuthController::class, 'register'])->name('register');
@@ -57,7 +59,6 @@ Route::group([
     Route::get('/home', function () {
         return view('admin.home');
     });
-
     Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store.token');
     Route::get('/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send_web_notification');
 
@@ -118,5 +119,20 @@ Route::group([
         Route::post('/{id}', [AdminMovieController::class, 'update'])->name('movies_update');
         Route::get('/{id}/delete', [AdminMovieController::class, 'destroy'])->name('movies_delete');
         Route::get('/{id}/restore', [AdminMovieController::class, 'restore'])->name('movies_restore');
+    });
+
+    // showtime
+    Route::group([
+        'prefix' => 'showtime',
+    ], function () {
+        Route::get('/', [AdminShowTimeController::class, 'index'])->name('showtime');
+        Route::get('/create', [AdminShowTimeController::class, 'create'])->name('showtime_create');
+        Route::get('/trash', [AdminShowTimeController::class, 'trash'])->name('showtime_trash');
+        Route::post('/', [AdminShowTimeController::class, 'store'])->name('showtime_add');
+        Route::get('/{idTheater}/{date}', [AdminShowTimeController::class, 'show'])->name('showtime_show');
+        Route::get('/{id}/edit', [AdminShowTimeController::class, 'edit'])->name('showtime_edit');
+        Route::post('/{id}', [AdminShowTimeController::class, 'update'])->name('showtime_update');
+        Route::get('/{id}/delete', [AdminShowTimeController::class, 'destroy'])->name('showtime_delete');
+        Route::get('/{id}/restore', [AdminShowTimeController::class, 'restore'])->name('showtime_restore');
     });
 });

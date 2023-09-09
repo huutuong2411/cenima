@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Moviepoint - Online Movie,Vedio and TV Show HTML Template</title>
+    <title> @yield('title')</title>
     <!-- Favicon Icon -->
     <link rel="icon" type="image/png" href="{{asset('user/assets/img/favcion.png')}}" />
     <!-- Bootstrap CSS -->
@@ -26,6 +26,9 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+    <link href="{{asset('admin/assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('admin/assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    
 </head>
 
 <body>

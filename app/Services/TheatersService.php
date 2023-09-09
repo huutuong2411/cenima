@@ -36,6 +36,11 @@ class TheatersService
         return $this->theatersRepository->update($id, $attributes);
     }
 
+    public function findTheater($id)
+    {
+        return $this->theatersRepository->find($id);
+    }
+
     public function deleteTheater($id)
     {
         return $this->theatersRepository->delete($id);
@@ -49,5 +54,10 @@ class TheatersService
     public function restoreTheater($id)
     {
         return $this->theatersRepository->restore($id);
+    }
+
+    public function detailShowtime($idTheater, $date)
+    {
+        return $this->theatersRepository->detailShowtime($idTheater, $date);
     }
 }

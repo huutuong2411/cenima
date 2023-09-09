@@ -7,4 +7,5 @@ namespace App\Repositories;
  */
 interface RoomsInterface extends RepositoryInterface
 {
+    public function findShowTimeByTheater($id_theater);
 }

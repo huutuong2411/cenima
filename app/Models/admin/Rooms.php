@@ -21,14 +21,9 @@ class Rooms extends Model
         'user_id',
     ];
 
-    public function Rows()
+    public function Showtime()
     {
-        return $this->hasMany('App\Models\admin\Rows', 'id_room');
-    }
-
-    public function Columns()
-    {
-        return $this->hasMany('App\Models\admin\Columns', 'id_room');
+        return $this->hasMany('App\Models\admin\Showtime', 'id_room');
     }
 
     public function Theaters()

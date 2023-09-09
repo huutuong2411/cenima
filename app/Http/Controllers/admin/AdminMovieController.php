@@ -59,7 +59,7 @@ class AdminMovieController extends Controller
         }
         $data['user_id'] = Auth::user()->id;
         if ($this->movieService->createMovie($data)) {
-            return redirect()->route('admin.movie')->with('success', __('Thêm phim thành công'));
+            return redirect()->route('admin.movies')->with('success', __('Thêm phim thành công'));
         } else {
             return redirect()->back()->with('error', __('Thêm phim không thành công'));
         }

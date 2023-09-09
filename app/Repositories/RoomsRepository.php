@@ -19,6 +19,13 @@ class RoomsRepository extends BaseRepository implements RoomsInterface
         return Rooms::class;
     }
 
+    public function findShowTimeByTheater($id_theater)
+    {
+        return $this->model
+            ->where('id_theater', $id_theater)
+            ->with('showtime')
+            ->get();
+    }
     /**
      * getExamples
      *

@@ -19,9 +19,11 @@ class MovieRepository extends BaseRepository implements MovieInterface
         return Movie::class;
     }
 
-    /**
-     * getExamples
-     *
-     * @return mixed
-     */
+    public function whereDate($date)
+    {
+        $data = $this->model->whereDate('start_date', '<=', $date)
+            ->get();
+
+        return $data;
+    }
 }

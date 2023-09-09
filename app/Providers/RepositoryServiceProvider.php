@@ -18,6 +18,8 @@ use App\Repositories\RowInterface;
 use App\Repositories\RowRepository;
 use App\Repositories\SeatsInterface;
 use App\Repositories\SeatsRepository;
+use App\Repositories\ShowtimeInterface;
+use App\Repositories\ShowtimeRepository;
 use App\Repositories\TheatersInterface;
 use App\Repositories\TheatersRepository;
 use App\Repositories\UserInterface;
@@ -47,6 +49,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ColumnInterface::class, ColumnRepository::class);
         $this->app->bind(SeatsInterface::class, SeatsRepository::class);
         $this->app->bind(CitiesInterface::class, CitiesRepository::class);
+        $this->app->bind(ShowtimeInterface::class, ShowtimeRepository::class);
     }
 
     /**

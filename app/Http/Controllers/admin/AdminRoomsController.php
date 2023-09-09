@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\admin\City;
 use App\Services\CitiesService;
 use App\Services\RoomsService;
 use App\Services\TheatersService;

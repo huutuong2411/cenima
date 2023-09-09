@@ -74,6 +74,7 @@ class AuthController extends Controller
     public function postRegistration(AuthRequest $request)
     {
         $data = $request->all();
+        $data['password'] = hash::make($request->password);
         $createUser = $this->userService->addUser($data);
         $token = Str::random(64);
         $dataUserVerify = [

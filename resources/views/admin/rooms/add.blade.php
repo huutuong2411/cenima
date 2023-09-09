@@ -9,18 +9,7 @@ Thêm phòng chiếu
 <h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Thêm phòng chiếu<a style="float:right;" href="{{route('admin.rooms')}}" class="btn btn-danger col-1"><i class="fas fa-sharp fa-solid fa-arrow-left"></i> Quay lại</a></h1>
 <div class="card shadow mb-4">
 
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    <form action="{{route('admin.rooms_add')}}" method="post" enctype="multipart/form-data" id="form">
+    <form action="{{route('admin.rooms_add')}}" method="post" id="form">
         @csrf
 
         <!-- Account details card-->

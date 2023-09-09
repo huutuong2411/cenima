@@ -50,4 +50,9 @@ class MovieService
     {
         return $this->movieRepository->restore($id);
     }
+
+    public function whereDate($date)
+    {
+        return $this->movieRepository->whereDate($date);
+    }
 }
