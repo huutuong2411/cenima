@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Jobs\SendMailVerify;
 use App\Services\AuthService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
-use App\Jobs\SendMailVerify;
 
 class AuthController extends Controller
 {
@@ -63,6 +62,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('user.home');
         }
+
         return redirect()->back()->with('error', __('Thông tin không hợp lệ'));
     }
 
@@ -84,6 +84,7 @@ class AuthController extends Controller
         $this->authService->createUserVerify($dataUserVerify);
 
         dispatch(new SendMailVerify($request->email, $token, 'Xác nhận đăng ký', 'email.verificationEmail'));
+
         return redirect()->route('user.confirm');
     }
 
@@ -91,6 +92,7 @@ class AuthController extends Controller
     {
         return view('auth.confirmEmail');
     }
+
     /**
      * Write code on Method
      *
@@ -126,7 +128,6 @@ class AuthController extends Controller
 
     public function postforgotpassword(Request $request)
     {
-
         $email = $request->email;
         $findEmail = $this->userService->findbyEmail(['email' => $email]);
         $token = Str::random(64);
@@ -146,24 +147,24 @@ class AuthController extends Controller
     public function verifyPasswordReset($token)
     {
         $verifyPassword = $this->authService->findResetPassword(['token' => $token]);
-      
-        $id= $this->userService->findbyEmail(['email'=>$verifyPassword->email])->id;
+
+        $id = $this->userService->findbyEmail(['email' => $verifyPassword->email])->id;
         $timeDifference = now()->diffInMinutes($verifyPassword->updated_at);
         if (is_null($verifyPassword)) {
             return redirect()->route('user.forgotpassword')->withErrors('Link xác thực không hợp lệ');
-        }elseif ($timeDifference > 5){
+        } elseif ($timeDifference > 5) {
             return redirect()->route('user.forgotpassword')->withErrors('Link xác thực hết hạn');
-        }else{
-            return redirect()->route('user.resetpassword',['id'=>$id]);
+        } else {
+            return redirect()->route('user.resetpassword', ['id' => $id]);
         }
     }
 
     public function resetpassword($id)
     {
-        return view('auth.resetpassword',compact('id'));
+        return view('auth.resetpassword', compact('id'));
     }
 
-    public function updatepassword(ResetPasswordRequest $request , string $id)
+    public function updatepassword(ResetPasswordRequest $request, string $id)
     {
         // $confirmation_code = time() . uniqid(true);
         $data['password'] = Hash::make($request->password);

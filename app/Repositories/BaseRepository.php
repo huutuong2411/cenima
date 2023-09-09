@@ -69,6 +69,7 @@ abstract class BaseRepository implements RepositoryInterface
     {
         $record = $this->find($id);
         $record->update($attributes);
+
         return $record;
     }
 
@@ -186,6 +187,7 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $data ?: null;
     }
+
     /**
      * paginate
      *

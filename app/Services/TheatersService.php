@@ -6,7 +6,7 @@ use App\Repositories\TheatersInterface;
 
 class TheatersService
 {
-    protected  $theatersRepository;
+    protected $theatersRepository;
 
     /**
      * __construct
@@ -36,9 +36,18 @@ class TheatersService
         return $this->theatersRepository->update($id, $attributes);
     }
 
-
     public function deleteTheater($id)
     {
         return $this->theatersRepository->delete($id);
+    }
+
+    public function theaterTrash()
+    {
+        return $this->theatersRepository->onlyTrashed();
+    }
+
+    public function restoreTheater($id)
+    {
+        return $this->theatersRepository->restore($id);
     }
 }

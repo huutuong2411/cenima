@@ -6,7 +6,7 @@ use App\Repositories\RoomsInterface;
 
 class RoomsService
 {
-    protected  $roomsRepository;
+    protected $roomsRepository;
 
     /**
      * __construct

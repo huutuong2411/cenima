@@ -9,17 +9,6 @@ Sửa phòng chiếu {{$room->name}}
 <h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Sửa phòng chiếu<a style="float:right;" href="{{route('admin.rooms')}}" class="btn btn-danger col-1"><i class="fas fa-sharp fa-solid fa-arrow-left"></i> Quay lại</a></h1>
 <div class="card shadow mb-4">
 
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
     <form action="{{route('admin.rooms_update',['id'=>$room->id])}}" method="post">
         @csrf
 
@@ -43,7 +32,7 @@ Sửa phòng chiếu {{$room->name}}
                             <select required class="form-select form-control" name="theaters" id="theaters">
                                 <option value="">--Chọn--</option>
                                 @foreach($theaters as $value)
-                                <option {{$value->id==$room->Theaters->id? 'selected':''}} value="{{$value->id}}">{{$value->name}}</option>
+                                <option {{$value->id==$room->id_theater? 'selected':''}} value="{{$value->id}}">{{$value->name}}</option>
                                 @endforeach
                             </select>
                         </div>

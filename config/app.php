@@ -181,7 +181,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
 
         Laravel\Passport\PassportServiceProvider::class,
-        'Intervention\Image\ImageServiceProvider'
+        'Intervention\Image\ImageServiceProvider',
     ],
 
     /*
@@ -197,7 +197,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
-        'Image' => 'Intervention\Image\Facades\Image'
+        'Image' => 'Intervention\Image\Facades\Image',
     ])->toArray(),
 
 ];

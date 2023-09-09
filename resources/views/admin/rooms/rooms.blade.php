@@ -1,16 +1,16 @@
 @extends('Admin.layout.main')
 
 @section('title')
-Quản lý nhập kho
+Quản lý phòng chiếu
 @endsection
 
 @section('content')
 
-<h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Quản lý nhập kho</h1>
+<h1 class="h3 mb-2 text-gray-800  border-bottom bg-white mb-4"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Quản lý phòng chiếu</h1>
 <div class="card shadow mb-4">
 
     <div class="card">
-        <div class="card-header text-primary font-weight-bold">Danh sách đơn nhập<a href="{{route('admin.rooms_trash')}}" class="btn btn-danger" style="float:right; margin-left:1%"><i class="fas fa-trash"></i> Thùng rác</a><a style="float:right" href="{{route('admin.rooms_create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm phòng</a></div>
+        <div class="card-header text-primary font-weight-bold">Danh sách phòng chiếu<a href="{{route('admin.rooms_trash')}}" class="btn btn-danger" style="float:right; margin-left:1%"><i class="fas fa-trash"></i> Thùng rác</a><a style="float:right" href="{{route('admin.rooms_create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm phòng</a></div>
         <div class="card-body table-responsive">
             <table class="table table-bordered" id="dataTable" cellspacing="0" data-order='[[ 0, "desc" ]]'>
                 <thead>

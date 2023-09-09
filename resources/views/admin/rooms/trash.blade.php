@@ -1,7 +1,7 @@
 @extends('Admin.layout.main')
 
 @section('title')
-Sản phẩm-thùng rác
+Phòng chiếu-thùng rác
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@ Sản phẩm-thùng rác
 
 <div class="card shadow mb-4">
     <div class="card">
-        <div class="card-header text-primary font-weight-bold">Danh sách sản phẩm đã xoá</div>
+        <div class="card-header text-primary font-weight-bold">Danh sách phòng chiếu đã xoá</div>
         <div class="card-body table-responsive">
             <table class="table table-bordered" id="dataTable" cellspacing="0">
                 <thead>

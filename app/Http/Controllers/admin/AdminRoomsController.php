@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\admin\City;
+use App\Services\CitiesService;
 use App\Services\RoomsService;
 use App\Services\TheatersService;
-use App\Services\CitiesService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 class AdminRoomsController extends Controller
 {
     protected RoomsService $roomsService;
+
     protected TheatersService $theatersService;
+
     protected CitiesService $citiesService;
 
     public function __construct(RoomsService $roomsService, TheatersService $theatersService, CitiesService $citiesService)
     {
-
         $this->roomsService = $roomsService;
         $this->theatersService = $theatersService;
         $this->citiesService = $citiesService;
@@ -27,7 +27,6 @@ class AdminRoomsController extends Controller
 
     public function index()
     {
-
         $rooms = $this->roomsService->withTheater()->get();
         // dd($rooms);
         return view('admin.rooms.rooms', compact('rooms'));
@@ -41,21 +40,22 @@ class AdminRoomsController extends Controller
     public function create()
     {
         $city = $this->citiesService->getAll();
+
         return view('admin.rooms.add', compact('city'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
         //call ajax city -> theaters
         if (!empty($request->id_city)) {
             $theaters = $this->citiesService->findCity($request->id_city)->theaters;
+
             return response()->json($theaters);
         }
 
@@ -70,37 +70,37 @@ class AdminRoomsController extends Controller
         if ($this->roomsService->createRoom($data)) {
             return redirect()->back()->with('success', __('Thêm phòng thành công'));
         } else {
-            return redirect()->back()->withErrors('Thêm phòng không thành công');
+            return redirect()->back()->with('error', __('Thêm phòng không thành công'));
         }
     }
 
     public function show($id)
     {
-        $room =  $this->roomsService->findRoom($id);
-        $theater = $room->Theaters->name;
-        $city = $room->Theaters->Cities->name;
-        return view('admin.rooms.roomDetail', compact('room', 'theater', 'city'));
+        $room = $this->roomsService->findRoom($id);
+
+        return view('admin.rooms.roomDetail', compact('room'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $room =  $this->roomsService->findRoom($id);
+        $room = $this->roomsService->findRoom($id);
         $theaters = $this->theatersService->getAll();
         $cities = $this->citiesService->getAll();
+
         return view('admin.rooms.edit', compact('room', 'theaters', 'cities'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -115,32 +115,36 @@ class AdminRoomsController extends Controller
         if ($this->roomsService->updateRoom($id, $data)) {
             return redirect()->back()->with('success', __('Sửa phòng thành công'));
         } else {
-            return redirect()->back()->withErrors('Sửa phòng không thành công');
+            return redirect()->back()->with('error', __('Sửa phòng không thành công'));
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->roomsService->deleteRoom($id);
-        return redirect()->back()->with('delete', __('Đã xoá danh mục thành công'));
+
+        return redirect()->back()->with('delete', __('Đã xoá phòng chiếu thành công'));
     }
 
     // thùng rác
     public function trash()
     {
         $trash = $this->roomsService->roomTrash();
+
         return view('admin.rooms.trash', compact('trash'));
     }
-    // khôi phục 
+
+    // khôi phục
     public function restore(string $id)
     {
         $this->roomsService->restoreRoom($id);
+
         return redirect()->back()->with('success', __('khôi phục thành công'));
     }
 }

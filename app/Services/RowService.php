@@ -6,7 +6,7 @@ use App\Repositories\RowInterface;
 
 class RowService
 {
-    protected  $rowRepository;
+    protected $rowRepository;
 
     /**
      * __construct
@@ -35,7 +35,6 @@ class RowService
     {
         return $this->rowRepository->update($id, $attributes);
     }
-
 
     public function deleteRow($id)
     {

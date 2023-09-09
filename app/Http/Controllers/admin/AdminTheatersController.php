@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\CitiesService;
+use App\Services\TheatersService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\admin\City;
-use App\Services\TheatersService;
-use App\Services\CitiesService;
 
 class AdminTheatersController extends Controller
 {
     protected TheatersService $theatersService;
+
     protected CitiesService $citiesService;
-    
 
     public function __construct(TheatersService $theatersService, CitiesService $citiesService)
     {
-
         $this->theatersService = $theatersService;
         $this->citiesService = $citiesService;
     }
@@ -26,6 +24,7 @@ class AdminTheatersController extends Controller
     {
         $city = $this->citiesService->getAll();
         $theaters = $this->theatersService->getAll();
+
         return view('admin.theaters.theaters', compact('theaters', 'city'));
     }
 
@@ -42,7 +41,7 @@ class AdminTheatersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -63,7 +62,7 @@ class AdminTheatersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +73,7 @@ class AdminTheatersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +84,8 @@ class AdminTheatersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -106,12 +105,29 @@ class AdminTheatersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->theatersService->deleteTheater($id);
+
         return redirect()->back()->with('delete', __('Đã xoá danh mục thành công'));
+    }
+
+    // thùng rác
+    public function trash()
+    {
+        $trash = $this->theatersService->theaterTrash();
+
+        return view('admin.theaters.trash', compact('trash'));
+    }
+
+    // khôi phục
+    public function restore(string $id)
+    {
+        $this->theatersService->restoreTheater($id);
+
+        return redirect()->back()->with('success', __('khôi phục thành công'));
     }
 }

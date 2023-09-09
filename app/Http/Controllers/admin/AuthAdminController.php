@@ -16,6 +16,7 @@ class AuthAdminController extends Controller
             return redirect()->route('admin.dashboard');
         }
     }
+
     // ĐĂNG NHẬP
     public function login(Request $request)
     {
@@ -32,10 +33,12 @@ class AuthAdminController extends Controller
             return redirect()->back()->withErrors('Sai email hoặc mật khẩu');
         }
     }
+
     // ĐĂNG XUẤT
     public function logout()
     {
         Auth::logout();
+
         return redirect()->route('admin.login');
     }
 }

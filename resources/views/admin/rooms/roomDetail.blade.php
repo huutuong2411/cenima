@@ -19,11 +19,11 @@ Chi tiết phòng chiếu
                 </div>
                 <div class="col-3">
                     <label class="small mb-1 font-weight-bold ml-3 text-primary">Tên rạp: </label>
-                    <label>{{$theater}}</label>
+                    <label>{{$room->Theaters->name}}</label>
                 </div>
                 <div class="col-3">
                     <label class="small mb-1 font-weight-bold ml-3 text-primary">Thành phố: </label>
-                    <label>{{$city}}</label>
+                    <label>{{$room->Theaters->Cities->name}}</label>
                 </div>
                 <div class="col-3">
                     <label class="small mb-1 font-weight-bold ml-3 text-primary">Số lượng ghế: </label>

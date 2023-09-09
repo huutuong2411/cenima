@@ -25,7 +25,7 @@ class LoginRequest extends FormRequest
             'required' => ':attribute không được để trống',
             'email' => ':attribute Phải là dạng email',
             'min' => ':attribute có ít nhất :min ký tự',
-            'regex' => ':attribute phải chứa chữ in hoa, ký tự đặc biệt'
+            'regex' => ':attribute phải chứa chữ in hoa, ký tự đặc biệt',
         ];
     }
 

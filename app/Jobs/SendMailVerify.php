@@ -14,9 +14,13 @@ class SendMailVerify implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $email;
+
     protected $token;
+
     protected $subject;
+
     protected $view;
+
     /**
      * Create a new job instance.
      *
@@ -27,7 +31,7 @@ class SendMailVerify implements ShouldQueue
         $this->email = $email;
         $this->token = $token;
         $this->subject = $subject;
-        $this->view= $view;
+        $this->view = $view;
     }
 
     /**

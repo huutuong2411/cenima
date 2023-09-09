@@ -29,7 +29,7 @@ class AuthRequest extends FormRequest
             'min' => ':attribute có ít nhất :min ký tự',
             'confirmed' => 'nhập lại :attribute không đúng',
             'regex' => ':attribute phải chứa ký tự In Hoa và ký tự đặc biệt',
-            'unique' => 'email đã tồn tại'
+            'unique' => 'email đã tồn tại',
         ];
     }
 

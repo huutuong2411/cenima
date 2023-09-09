@@ -6,7 +6,7 @@ use App\Repositories\CategoriesInterface;
 
 class CategoriesService
 {
-    protected  $categoriesRepository;
+    protected $categoriesRepository;
 
     /**
      * __construct
@@ -35,7 +35,6 @@ class CategoriesService
     {
         return $this->categoriesRepository->update($id, $attributes);
     }
-
 
     public function deleteCategory($id)
     {

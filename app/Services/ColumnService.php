@@ -6,7 +6,7 @@ use App\Repositories\ColumnInterface;
 
 class ColumnService
 {
-    protected  $columnRepository;
+    protected $columnRepository;
 
     /**
      * __construct

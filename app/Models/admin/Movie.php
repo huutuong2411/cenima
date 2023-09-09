@@ -28,6 +28,6 @@ class Movie extends Model
         'time',
         'description',
         'id_category',
-        'user_id'
+        'user_id',
     ];
 }

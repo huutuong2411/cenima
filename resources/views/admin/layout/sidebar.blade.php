@@ -44,7 +44,7 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="{{Request::is('admin/movie*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.movie')}}">QL phim</a>
+                <a class="{{Request::is('admin/movie*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.movies')}}">QL phim</a>
                 <a class="{{Request::is('admin/categories*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.categories')}}">QL danh mục</a>
                 <a class="{{Request::is('admin/purchase*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL bài viết</a>
             </div>

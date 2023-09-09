@@ -6,7 +6,7 @@ use App\Repositories\SeatsInterface;
 
 class SeatsService
 {
-    protected  $seatsRepository;
+    protected $seatsRepository;
 
     /**
      * __construct

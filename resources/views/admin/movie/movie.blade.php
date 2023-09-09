@@ -8,9 +8,9 @@ Quản lý Phim
 <div class="card shadow mb-4">
 
     <div class="card">
-        <div class="card-header text-primary font-weight-bold">Danh sách phim<a href="" class="btn btn-danger" style="float:right; margin-left:1%"><i class="fas fa-trash"></i> Thùng rác</a>
+        <div class="card-header text-primary font-weight-bold">Danh sách phim<a href="{{route('admin.movies_trash')}}" class="btn btn-danger" style="float:right; margin-left:1%"><i class="fas fa-trash"></i> Thùng rác</a>
 
-            <a style="float:right" href="{{route('admin.create_movie')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm phim</a>
+            <a style="float:right" href="{{route('admin.movies_create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm phim</a>
 
         </div>
         <div class="card-body">
@@ -33,13 +33,14 @@ Quản lý Phim
                             <th scope="row">{{$value->id}}</th>
                             <td>{{$value->name}}</td>
                             <td><img style="max-width:100%;" src="{{asset('/admin/assets/img/movies/'.$value->image)}}"></td>
-                            <td></td>
-                            <td>{{$value->time}}</td>
+                            <td><iframe width="560" height="315" src="{{$value->trailer}}" frameborder="0" allowfullscreen></iframe>
+</td>
+                            <td>{{$value->time}} phút</td>
                             <td></td>
                             <td style="text-align: center">
-                                <a href="" class="btn btn-info btn-circle btn-sm" style="margin-left:2%"><i class="fas fa-solid fa-eye"></i></a>
-                                <a href="" class="btn btn-warning btn-circle btn-sm" style="margin-left:2%"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="" class="btn btn-danger btn-circle btn-sm" style="margin-left:2%"><i class="fas fa-trash"></i></a>
+                                <a href="{{route('admin.movies_show',['id'=>$value->id])}}" style="margin-left:2%" class="btn btn-info btn-circle btn-sm show"><i class="fas fa-solid fa-eye"></i></a>
+                                <a href="{{route('admin.movies_edit',['id'=>$value->id])}}" class="btn btn-warning btn-circle btn-sm" style="margin-left:2%"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{route('admin.movies_delete',['id'=>$value->id])}}" class="btn btn-danger btn-circle btn-sm" style="margin-left:2%"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

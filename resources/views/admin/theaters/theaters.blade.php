@@ -57,7 +57,7 @@ Quản lý rạp phim
         </button>
       </div>
       <div class="modal-body">
-        Các sản phẩm liên quan sẽ bị xoá theo danh mục này
+        Các phòng chiếu liên quan sẽ bị xoá theo rạp chiếu này
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

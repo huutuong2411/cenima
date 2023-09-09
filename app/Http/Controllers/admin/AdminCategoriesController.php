@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Services\CategoriesService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminCategoriesController extends Controller
@@ -13,13 +13,13 @@ class AdminCategoriesController extends Controller
 
     public function __construct(CategoriesService $categoriesService)
     {
-
         $this->categoriesService = $categoriesService;
     }
 
     public function index()
     {
         $categories = $this->categoriesService->getAll();
+
         return view('admin.categories.categories', compact('categories'));
     }
 
@@ -36,7 +36,7 @@ class AdminCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,7 +55,7 @@ class AdminCategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,7 +66,7 @@ class AdminCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,8 +77,8 @@ class AdminCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,12 +96,13 @@ class AdminCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->categoriesService->deleteCategory($id);
+
         return redirect()->back()->with('delete', __('Đã xoá danh mục thành công'));
     }
     // thùng rác
@@ -115,6 +116,6 @@ class AdminCategoriesController extends Controller
     // {
     //     Category::withTrashed()->find($id)->restore();
     //     Product::where('id_category',$id)->restore();
-    //     return redirect()->back()->with('success',__('khôi phục thành công')); 
+    //     return redirect()->back()->with('success',__('khôi phục thành công'));
     // }
 }

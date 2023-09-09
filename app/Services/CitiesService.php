@@ -6,7 +6,7 @@ use App\Repositories\CitiesInterface;
 
 class CitiesService
 {
-    protected  $citiesRepository;
+    protected $citiesRepository;
 
     /**
      * __construct
@@ -25,5 +25,4 @@ class CitiesService
     {
         return $this->citiesRepository->find($id);
     }
-
 }
