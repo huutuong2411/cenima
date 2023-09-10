@@ -328,7 +328,7 @@ textarea,
 input,
 textarea::-webkit-input-placeholder,
 input::-webkit-input-placeholder {
-    color: #000000;
+    color: #ffffff;
 }
 
 /*--------------------------------------
@@ -924,7 +924,7 @@ hr {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    padding: 280px 0 200px;
+    padding: 340px 0 120px;
 }
 
 .breadcrumb-area-content {
@@ -1166,7 +1166,6 @@ hr {
 .ticket-box-table {
     display: flex;
     padding-top: 35px;
-    justify-content: space-between;
 }
 
 .ticket-table-seat td.active,
@@ -1176,18 +1175,18 @@ hr {
     color: #fff;
 }
 
-.ticket-table-seat td {
-    width: 19px;
-    height: 19px;
+.ticket-table-seat label {
+    width: 25px;
+    height: 25px;
     border: 1px solid #aaa;
-    border-radius: 30px;
     text-align: center;
-    line-height: 15px;
+    line-height: 23px;
     border-collapse: collapse;
     margin: 3px;
-    font-size: 10px;
+    font-size: 13px;
     display: inline-block;
 }
+
 
 .ticket-box-table table:not(.ticket-table-seat) td {
     line-height: 24px;

@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> @yield('title')</title>
     <!-- Favicon Icon -->
+    <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" type="image/png" href="{{asset('user/assets/img/favcion.png')}}" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/bootstrap.min.css')}}" media="all" />
@@ -22,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/style.css')}}" media="all" />
     <!-- Responsive CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/responsive.css')}}" media="all" />
+
     <!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -43,226 +50,61 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="buy-ticket-box">
-                            <h4>Buy Tickets</h4>
-                            <h5>Seat</h5>
-                            <h6>Screen</h6>
+                            <h4>Mua vé</h4>
+                            <h5>Sơ đồ ghế</h5>
+                            <h6 class="mx-auto">Màn hình</h6>
                             <div class="ticket-box-table">
-                                <table class="ticket-table-seat">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                </table>
                                 <table>
-                                    <tr>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                    </tr>
+                                    <tbody id="row_showtime">
+                                    </tbody>
                                 </table>
-                                <table class="ticket-table-seat">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="active">1</td>
-                                        <td class="active">1</td>
-                                        <td class="active">1</td>
-                                        <td class="active">1</td>
-                                        <td class="active">1</td>
-                                        <td class="active">1</td>
-                                        <td class="active">1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                    </tr>
-                                </table>
-                                <table class="ticket-table-seat">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
+                                <table class="ticket-table-seat mx-auto" >
+                                    <tbody id="column_showtime">
+                                        
+                                    </tbody>
                                 </table>
                             </div>
-                            <div class="ticket-box-available">
-                                <input type="checkbox" />
-                                <span>Available</span>
-                                <input type="checkbox" checked />
-                                <span>Unavailable</span>
-                                <input type="checkbox" />
-                                <span>Selected</span>
-                            </div>
-                            <a href="#" class="theme-btn">previous</a>
-                            <a href="#" class="theme-btn">Next</a>
+                            <br>
+                            <label class="btn btn-danger">ghế bạn chọn</label>
+                            <label class="btn btn-secondary">ghế đã đặt</label>
+                            <label class="btn btn-outline-dark">ghế trống</label>
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
-                        <div class="buy-ticket-box mtr-30">
-                            <h4>Your Information</h4>
+                        <div class="buy-ticket-box mtr-30" id="infor">
+                            <h4>Thông tin vé</h4>
                             <ul>
                                 <li>
-                                    <p>Location</p>
-                                    <span>HB Cinema Box Corner</span>
+                                    <p>Rạp chiếu</p>
+                                    <span class="text-primary" id="theater_name">CGV Đà Nẵng</span>
+                                    <br>
+                                    <span id="theater_address">30 Huy Du Đà Nẵng</span>
                                 </li>
                                 <li>
-                                    <p>TIME</p>
-                                    <span>2018.07.09 20:40</span>
+                                    <p>Thời gian</p>
+                                    <span class="text-danger" id="time_start">20:40</span>
+                                    <br>
+                                    <span id="showtime_date">Ngày 23/08/2023</span>
                                 </li>
                                 <li>
-                                    <p>Movie name</p>
-                                    <span>Home Alone</span>
+                                    <p>Tên phim</p>
+                                    <span id="movie_name">Bộ đôi báo thử</span>
                                 </li>
                                 <li>
-                                    <p>Ticket number</p>
-                                    <span>2 Adults, 2 Children, 2 Seniors</span>
+                                    <p>Số ghế</p>
+                                    <span class="text-danger">A1, A2, A3</span> <br>
+                                    <span id="room_theater"></span>
                                 </li>
                                 <li>
-                                    <p>Price</p>
-                                    <span>89$</span>
+                                    <p>Giá</p>
+                                    <span id="showtime_price">250.000 đ</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
+                    <button class="theme-btn col-2 text-center">Đặt vé</button>
                 </div>
+
             </div>
         </div>
     </div><!-- header section end -->

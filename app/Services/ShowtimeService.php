@@ -70,4 +70,19 @@ class ShowtimeService
     {
         return $this->showtimeRepository->ShowtimeByTheater();
     }
+
+    public function showTimeByIdRoom($roomID, $date)
+    {
+        return $this->showtimeRepository->showTimeByIdRoom($roomID, $date);
+    }
+
+    public function dateByRoomAndIdMovie($roomID, $idMovie)
+    {
+        return $this->showtimeRepository->dateByRoomAndIdMovie($roomID, $idMovie);
+    }
+
+    public function showTimeByMovieDate($roomID, $date, $idMovie)
+    {
+        return $this->showtimeRepository->showTimeByMovieDate($roomID, $date, $idMovie);
+    }
 }

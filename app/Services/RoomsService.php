@@ -61,8 +61,8 @@ class RoomsService
         return $this->roomsRepository->restore($id);
     }
 
-    public function findShowTimeByTheater($id_theater)
+    public function getShowTimeByTheater($id_theater)
     {
-        return $this->roomsRepository->findShowTimeByTheater($id_theater);
+        return $this->roomsRepository->getShowTimeByTheater($id_theater);
     }
 }

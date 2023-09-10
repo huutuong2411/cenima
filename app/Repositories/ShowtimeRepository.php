@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\admin\Showtime;
+use Carbon\Carbon;
 
 /**
  * Class ExampleRepository.
@@ -44,5 +45,40 @@ class ShowtimeRepository extends BaseRepository implements ShowtimeInterface
             ->distinct()
             ->orderBy('showtime.date', 'asc')
             ->get();
+    }
+
+    public function showTimeByIdRoom($roomID, $date)
+    {
+        return $this->model->whereIn('id_room', $roomID)->where('date', $date)->get()->groupBy('id_room');
+    }
+
+    public function dateByRoomAndIdMovie($roomID, $idMovie)
+    {
+        $today = Carbon::today();
+        $dayOfWeekMap = [
+            '0' => 'Chủ Nhật',
+            '1' => 'Thứ 2',
+            '2' => 'Thứ 3',
+            '3' => 'Thứ 4',
+            '4' => 'Thứ 5',
+            '5' => 'Thứ 6',
+            '6' => 'Thứ 7',
+        ];
+        $dates = $this->model->select('date')->whereIn('id_room', $roomID)->where('id_movie', $idMovie)->whereDate('date', '>=', $today)->get()->groupBy('date');
+        $formattedDates = [];
+        foreach ($dates as $day => $value) {
+            $dayOfWeek = $dayOfWeekMap[Carbon::parse($day)->dayOfWeek];
+            $formattedDates[] = [
+                'date' => $day,
+                'day_of_week' => $dayOfWeek,
+            ];
+        }
+
+        return $formattedDates;
+    }
+
+    public function showTimeByMovieDate($roomID, $date, $idMovie)
+    {
+        return $this->model->whereIn('id_room', $roomID)->where('id_movie', $idMovie)->where('date', $date)->get();
     }
 }

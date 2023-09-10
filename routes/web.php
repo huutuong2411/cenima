@@ -30,7 +30,7 @@ Route::group([
     'as' => 'user.',
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home'); //snake_case;
-    Route::get('/{id}', [MovieController::class, 'show'])->name('movie_show');
+    Route::get('/{id}/detail', [MovieController::class, 'show'])->name('movie_show'); //movie detail
     Route::get('login', [AuthController::class, 'login'])->name('login');
     Route::post('post-login', [AuthController::class, 'postLogin'])->name('login_post');
     Route::get('register', [AuthController::class, 'register'])->name('register');
@@ -44,6 +44,8 @@ Route::group([
     Route::get('account/resetpassword/{token}', [AuthController::class, 'verifyPasswordReset'])->name('link_resetpassword');
     Route::get('resetpassword/{id}', [AuthController::class, 'resetpassword'])->name('resetpassword');
     Route::post('resetpassword/{id}', [AuthController::class, 'updatepassword'])->name('post_resetpassword');
+    //ajax call to infor showtime
+    Route::post('ajaxOrder', [MovieController::class, 'ajaxOrder'])->name('ajaxOrder');
 });
 
 // users
@@ -98,12 +100,12 @@ Route::group([
     ], function () {
         Route::get('/', [AdminRoomsController::class, 'index'])->name('rooms');
         Route::get('/create', [AdminRoomsController::class, 'create'])->name('rooms_create');
-        Route::get('/trash', [AdminRoomsController::class, 'trash'])->name('rooms_trash');
         Route::post('/', [AdminRoomsController::class, 'store'])->name('rooms_add');
-        Route::get('/{id}', [AdminRoomsController::class, 'show'])->name('rooms_show');
+        Route::get('/{id}/detail', [AdminRoomsController::class, 'show'])->name('rooms_show');
         Route::get('/{id}/edit', [AdminRoomsController::class, 'edit'])->name('rooms_edit');
         Route::post('/{id}', [AdminRoomsController::class, 'update'])->name('rooms_update');
         Route::get('/{id}/delete', [AdminRoomsController::class, 'destroy'])->name('rooms_delete');
+        Route::get('/trash', [AdminRoomsController::class, 'trash'])->name('rooms_trash');
         Route::get('/{id}/restore', [AdminRoomsController::class, 'restore'])->name('rooms_restore');
     });
     //movie
@@ -112,12 +114,12 @@ Route::group([
     ], function () {
         Route::get('/', [AdminMovieController::class, 'index'])->name('movies');
         Route::get('/create', [AdminMovieController::class, 'create'])->name('movies_create');
-        Route::get('/trash', [AdminMovieController::class, 'trash'])->name('movies_trash');
         Route::post('/', [AdminMovieController::class, 'store'])->name('movies_add');
-        Route::get('/{id}', [AdminMovieController::class, 'show'])->name('movies_show');
+        Route::get('/{id}/detail', [AdminMovieController::class, 'show'])->name('movies_show');
         Route::get('/{id}/edit', [AdminMovieController::class, 'edit'])->name('movies_edit');
         Route::post('/{id}', [AdminMovieController::class, 'update'])->name('movies_update');
         Route::get('/{id}/delete', [AdminMovieController::class, 'destroy'])->name('movies_delete');
+        Route::get('/trash', [AdminMovieController::class, 'trash'])->name('movies_trash');
         Route::get('/{id}/restore', [AdminMovieController::class, 'restore'])->name('movies_restore');
     });
 

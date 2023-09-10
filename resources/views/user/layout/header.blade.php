@@ -44,6 +44,7 @@
                         </li>
                         <li><a href="blog.html">News</a></li>
                         <li><a class="theme-btn" href="#"><i class="icofont icofont-ticket"></i> Vé của bạn</a></li>
+                        <button type="button" id="testclick">test click</button>
                     </ul>
                 </div>
             </div>

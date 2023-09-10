@@ -67,7 +67,7 @@ class AdminShowTimeController extends Controller
 
             return response()->json($theaters);
         }
-        //call ajax city -> theaters
+        //call ajax theater -> room
         if (!empty($request->id_theater)) {
             $rooms = $this->theatersService->findTheater($request->id_theater)->rooms;
 
@@ -133,10 +133,10 @@ class AdminShowTimeController extends Controller
      */
     public function show($idTheater, $date)
     {
-        //      $showtimes = $this->roomsService->findShowTimeByTheater($idTheater)->pluck('showtime')
-        //  ->where('date', $date) // Lọc showtime theo ngày
-        // ->get();
-        //      dd($showtimes);
+        $roomID = $this->roomsService->getShowTimeByTheater($idTheater)->pluck('id');
+
+        $showtime = $this->showtimeService->showTimeByIdRoom($roomID, $date);
+        dd($showtime);
     }
 
     /**
