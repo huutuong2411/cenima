@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Services\CitiesService;
 use App\Services\MovieService;
+use App\Services\OrderService;
 use App\Services\RoomsService;
 use App\Services\ShowtimeService;
 use Illuminate\Http\Request;
@@ -13,14 +14,22 @@ class MovieController extends Controller
 {
     protected MovieService $movieService;
 
+    protected OrderService $orderService;
+
     protected CitiesService $citiesService;
 
     protected ShowtimeService $showtimeService;
 
     protected RoomsService $roomsService;
 
-    public function __construct(MovieService $movieService, CitiesService $citiesService, ShowtimeService $showtimeService, RoomsService $roomsService)
-    {
+    public function __construct(
+        MovieService $movieService,
+        CitiesService $citiesService,
+        ShowtimeService $showtimeService,
+        RoomsService $roomsService,
+        OrderService $orderService
+    ) {
+        $this->orderService = $orderService;
         $this->movieService = $movieService;
         $this->citiesService = $citiesService;
         $this->showtimeService = $showtimeService;
@@ -76,25 +85,34 @@ class MovieController extends Controller
 
         //call movie infor and seats by id_showtime
         if (!empty($request->id_showtime)) {
-            $id_showtime = $request->id_showtime;
-            $showtime = $this->showtimeService->findShowtime($id_showtime);
+            $showtimeID = $request->id_showtime;
+            $showtime = $this->showtimeService->findShowtime($showtimeID);
             $price = $showtime->price;
-            $start_time = $showtime->start_at;
+            $startTime = $showtime->start_at;
             $date = $showtime->date;
             $room = $this->roomsService->findRoom($showtime->id_room);
             $roomSeats = json_decode($room->seats);
             $roomName = $room->name;
             $theaterName = $room->theaters->name;
             $theaterAddress = $room->theaters->address;
+            //xử lý số ghế đã được đặt
+            $bookedTicket = $this->orderService->orderByShowtimeID($showtimeID);
+            $bookedTicketArray = [];
+            foreach ($bookedTicket as $order) {
+                $orderArray = json_decode($order, true);
+                $bookedTicketArray = array_merge_recursive($bookedTicketArray, $orderArray);
+            }
+            //
             $data = [
-                'id_showtime' => $id_showtime,
+                'id_showtime' => $showtimeID,
                 'price' => $price,
-                'start_time' => $start_time,
-                'roomSeats' => $roomSeats,
-                'roomName' => $roomName,
-                'theaterName' => $theaterName,
-                'theaterAddress' => $theaterAddress,
+                'start_time' => $startTime,
+                'room_seets' => $roomSeats,
+                'room_name' => $roomName,
+                'theater_name' => $theaterName,
+                'theater_address' => $theaterAddress,
                 'date' => $date,
+                'booked_ticket' => $bookedTicketArray
             ];
 
             return response()->json($data);
@@ -111,7 +129,6 @@ class MovieController extends Controller
     {
         $movie = $this->movieService->findMovie($id);
         $city = $this->citiesService->getAll();
-
         return view('user.movie.movieDetail', compact('movie', 'city'));
     }
 

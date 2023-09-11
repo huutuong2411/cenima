@@ -26,6 +26,8 @@ use App\Repositories\UserInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\UserVerifyInterface;
 use App\Repositories\UserVerifyRepository;
+use App\Repositories\OrderInterface;
+use App\Repositories\OrderRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -50,6 +52,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SeatsInterface::class, SeatsRepository::class);
         $this->app->bind(CitiesInterface::class, CitiesRepository::class);
         $this->app->bind(ShowtimeInterface::class, ShowtimeRepository::class);
+        $this->app->bind(OrderInterface::class, OrderRepository::class);
     }
 
     /**

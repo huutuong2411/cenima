@@ -12,6 +12,7 @@ use App\Http\Controllers\NotificationSendController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\MovieController;
+use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::group([
     'prefix' => '',
     'as' => 'user.',
@@ -46,6 +48,8 @@ Route::group([
     Route::post('resetpassword/{id}', [AuthController::class, 'updatepassword'])->name('post_resetpassword');
     //ajax call to infor showtime
     Route::post('ajaxOrder', [MovieController::class, 'ajaxOrder'])->name('ajaxOrder');
+    //order
+    Route::post('createOrder', [OrderController::class, 'createOrder'])->name('create_order');
 });
 
 // users
@@ -53,6 +57,13 @@ Route::resource('users', UserController::class);
 // test send mail spam
 Route::get('/send-mail', [SendEmailController::class, 'getSendEmail'])->name('get_send_email');
 Route::post('/send-mail', [SendEmailController::class, 'postSendEmail'])->name('post_send_email');
+
+
+
+
+
+
+
 
 Route::group([
     'prefix' => 'admin',
