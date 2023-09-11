@@ -10,6 +10,8 @@ use App\Repositories\ColumnInterface;
 use App\Repositories\ColumnRepository;
 use App\Repositories\MovieInterface;
 use App\Repositories\MovieRepository;
+use App\Repositories\OrderInterface;
+use App\Repositories\OrderRepository;
 use App\Repositories\PasswordResetInterface;
 use App\Repositories\PasswordResetRepository;
 use App\Repositories\RoomsInterface;
@@ -26,8 +28,6 @@ use App\Repositories\UserInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\UserVerifyInterface;
 use App\Repositories\UserVerifyRepository;
-use App\Repositories\OrderInterface;
-use App\Repositories\OrderRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider

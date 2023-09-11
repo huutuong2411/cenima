@@ -24,7 +24,11 @@ class AdminShowTimeController extends Controller
 
     protected RoomsService $roomsService;
 
-    public function __construct(ShowtimeService $showtimeService, CitiesService $citiesService, MovieService $movieService, TheatersService $theatersService, RoomsService $roomsService)
+    public function __construct(ShowtimeService $showtimeService,
+        CitiesService $citiesService,
+        MovieService $movieService,
+        TheatersService $theatersService,
+        RoomsService $roomsService)
     {
         $this->showtimeService = $showtimeService;
         $this->citiesService = $citiesService;

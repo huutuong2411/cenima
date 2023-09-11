@@ -112,7 +112,7 @@ class MovieController extends Controller
                 'theater_name' => $theaterName,
                 'theater_address' => $theaterAddress,
                 'date' => $date,
-                'booked_ticket' => $bookedTicketArray
+                'booked_ticket' => $bookedTicketArray,
             ];
 
             return response()->json($data);
@@ -129,6 +129,7 @@ class MovieController extends Controller
     {
         $movie = $this->movieService->findMovie($id);
         $city = $this->citiesService->getAll();
+
         return view('user.movie.movieDetail', compact('movie', 'city'));
     }
 

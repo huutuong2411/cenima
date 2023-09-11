@@ -23,10 +23,7 @@
 		$('html, body').animate({scrollTop : 0},2000);
 		return false;
 	});
-	$('.menu-area ul > li > .theme-btn').on('click', function () {
-		$('.buy-ticket').show();
-		return false;
-	});
+
 	$('.buy-ticket .buy-ticket-area > a').on('click', function () {
 		$('.buy-ticket').hide();
 		return false;

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header-area">
             <div class="logo">
-                <a href="index-2.html"><img src="{{asset('user/assets/img/logo.png')}}" alt="logo" /></a>
+                <a href="{{route('user.home')}}"><img src="{{asset('user/assets/img/logo.png')}}" alt="logo" /></a>
             </div>
             <div class="header-right">
                 <form action="#">
@@ -43,8 +43,7 @@
                             </ul>
                         </li>
                         <li><a href="blog.html">News</a></li>
-                        <li><a class="theme-btn" href="#"><i class="icofont icofont-ticket"></i> Vé của bạn</a></li>
-                        <button type="button" id="testclick">test click</button>
+                        <li><a class="theme-btn theme-btn2" href="{{route('user.get_list_ticket')}}"><i class="icofont icofont-ticket"></i> Vé của bạn</a></li>
                     </ul>
                 </div>
             </div>

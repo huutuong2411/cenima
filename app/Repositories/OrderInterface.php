@@ -8,4 +8,6 @@ namespace App\Repositories;
 interface OrderInterface extends RepositoryInterface
 {
     public function orderByShowtimeID($showtimeID);
+
+    public function whereUserID($userID);
 }

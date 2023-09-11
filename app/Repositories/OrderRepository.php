@@ -23,4 +23,9 @@ class OrderRepository extends BaseRepository implements OrderInterface
     {
         return $this->model->where('id_showtime', $showtimeID)->pluck('ticket');
     }
+
+    public function whereUserID($userID)
+    {
+        return $this->model->where('user_id', $userID)->get();
+    }
 }

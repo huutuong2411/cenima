@@ -25,4 +25,9 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\admin\Showtime', 'id_showtime');
     }
+
+    public function User()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
 }

@@ -45,4 +45,14 @@ class OrderService
     {
         return $this->orderRepository->orderByShowtimeID($showtimeID);
     }
+
+    public function findOrder($id)
+    {
+        return $this->orderRepository->find($id);
+    }
+
+    public function whereUserID($userID)
+    {
+        return $this->orderRepository->whereUserID($userID);
+    }
 }

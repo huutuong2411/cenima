@@ -8,6 +8,7 @@
     <title> @yield('title')</title>
     <!-- Favicon Icon -->
     <!-- Latest compiled and minified CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -24,10 +25,13 @@
     <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/owl.carousel.css')}}">
     <!-- Popup CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/magnific-popup.css')}}">
+
     <!-- Main style CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/style.css')}}" media="all" />
+    <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/ticket.css')}}" media="all"/>
     <!-- Responsive CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('user/assets/css/responsive.css')}}" media="all" />
+
 
     <!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>

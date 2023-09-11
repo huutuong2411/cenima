@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => '',
     'as' => 'user.',
+    'middleware' => 'UserLogin',
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home'); //snake_case;
     Route::get('/{id}/detail', [MovieController::class, 'show'])->name('movie_show'); //movie detail
@@ -50,6 +51,8 @@ Route::group([
     Route::post('ajaxOrder', [MovieController::class, 'ajaxOrder'])->name('ajaxOrder');
     //order
     Route::post('createOrder', [OrderController::class, 'createOrder'])->name('create_order');
+    Route::get('order/{id}/ticket', [OrderController::class, 'showTicket'])->name('show_ticket');
+    Route::get('order/myticket', [OrderController::class, 'getlistTicket'])->name('get_list_ticket');
 });
 
 // users
@@ -58,16 +61,15 @@ Route::resource('users', UserController::class);
 Route::get('/send-mail', [SendEmailController::class, 'getSendEmail'])->name('get_send_email');
 Route::post('/send-mail', [SendEmailController::class, 'postSendEmail'])->name('post_send_email');
 
-
-
-
-
-
-
+//404 not found
+Route::get('/notfound', function () {
+    return view('404.404');
+});
 
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
+    'middleware' => 'AdminLogin',
 ], function () {
     Route::get('/home', function () {
         return view('admin.home');
