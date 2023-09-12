@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="{{Request::route()->getName() == 'admin.dashboard' ? 'nav-item active' : 'nav-item' }}">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('admin.dashboard')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Trang chủ</span></a>
     </li>
@@ -22,9 +22,9 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="{{Request::is('admin/category*','admin/brand*','admin/product*','admin/size*') ? 'nav-item active' : 'nav-item'}}">
+    <li class="{{Request::is('admin/theaters*','admin/showtime*','admin/rooms*') ? 'nav-item active' : 'nav-item'}}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-solid fa-shoe-prints"></i>
+            <i class="fas fa-solid fa-newspaper"></i>
             <span>Quản lý chiếu phim</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -37,7 +37,7 @@
     </li>
     <!-- Nav Item - Utilities Collapse Menu -->
 
-    <li class="{{Request::is('admin/vendor*','admin/purchase*') ? 'nav-item active' : 'nav-item'}}">
+    <li class="{{Request::is('admin/movie*','admin/categories*','admin/purchase*') ? 'nav-item active' : 'nav-item'}}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-solid fa-file-import"></i>
             <span>Quản lý phim</span>
@@ -46,7 +46,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="{{Request::is('admin/movie*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.movies')}}">QL phim</a>
                 <a class="{{Request::is('admin/categories*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.categories')}}">QL danh mục</a>
-                <a class="{{Request::is('admin/purchase*') ? 'collapse-item active' : 'collapse-item'}}" href="">QL bài viết</a>
             </div>
         </div>
     </li>
@@ -55,8 +54,8 @@
     <!-- Nav Item - Pages Collapse Menu -->
 
     <!-- Nav Item - Charts -->
-    <li class="{{Request::is('admin/order*') ? 'nav-item active' : 'nav-item'}}">
-        <a class="nav-link" href="">
+    <li class="{{Request::is('admin/ticket*') ? 'nav-item active' : 'nav-item'}}">
+        <a class="nav-link" href="{{route('admin.ticket')}}">
             <i class="fas fa-solid fa-truck"></i>
             <span>Quản lý vé</span></a>
     </li>
@@ -65,13 +64,6 @@
             <i class="fas fa-solid fa-users"></i>
             <span>Quản lý nhân viên</span></a>
     </li>
-    <!-- quản lý bài viết -->
-    <li class="{{Request::is('admin/blog*') ? 'nav-item active' : 'nav-item'}}">
-        <a class="nav-link" href="">
-            <i class="fas fa-solid fa-newspaper"></i>
-            <span> Quản lý đồ uống</span></a>
-    </li>
-
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

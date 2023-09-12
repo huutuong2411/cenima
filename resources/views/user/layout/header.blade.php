@@ -43,7 +43,7 @@
                             </ul>
                         </li>
                         <li><a href="blog.html">News</a></li>
-                        <li><a class="theme-btn theme-btn2" href="{{route('user.get_list_ticket')}}"><i class="icofont icofont-ticket"></i> Vé của bạn</a></li>
+                        <li><a class="theme-btn theme-btn2" href="{{route('user.get_list_my_ticket')}}"><i class="icofont icofont-ticket"></i> Vé của bạn</a></li>
                     </ul>
                 </div>
             </div>

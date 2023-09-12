@@ -28,7 +28,7 @@ class NotificationSendController extends Controller
         return response()->json(['Token successfully stored.']);
     }
 
-    public function sendNotification()
+    public function sendNotification($id)
     {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
@@ -69,6 +69,6 @@ class NotificationSendController extends Controller
         // Close connection
         curl_close($ch);
         // FCM response
-        return back();
+        return redirect()->route('user.show_ticket', ['id' => $id])->with('success', __('Đặt vé thành công'));
     }
 }

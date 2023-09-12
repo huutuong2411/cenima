@@ -23,8 +23,7 @@ class AdminMovieController extends Controller
 
     public function index()
     {
-        $movie = $this->movieService->getAll();
-
+        $movie = $this->movieService->getMovieAndSales();
         return view('admin.movie.movie', compact('movie'));
     }
 
@@ -45,7 +44,7 @@ class AdminMovieController extends Controller
             'start_date' => $request->start_date,
             'time' => $request->time,
             'description' => $request->description,
-            'user_id' = Auth::user()->id,
+            'user_id' => Auth::user()->id,
         ];
         if ($request->hasfile('image')) {
             $image = $request->file('image');
@@ -58,7 +57,7 @@ class AdminMovieController extends Controller
             Image::make($image->getrealpath())->resize(524, 724)->save($path);
             $data['image'] = $name;
         }
-        
+
         if ($this->movieService->createMovie($data)) {
             return redirect()->route('admin.movies')->with('success', __('Thêm phim thành công'));
         } else {

@@ -55,4 +55,24 @@ class OrderService
     {
         return $this->orderRepository->whereUserID($userID);
     }
+
+    public function monthRevenue($month, $year)
+    {
+        return $this->orderRepository->Monthrevenue($month, $year);
+    }
+
+    public function weekRevenue()
+    {
+        return $this->orderRepository->Weekrevenue();
+    }
+
+    public function getListYears()
+    {
+        return $this->orderRepository->getListYears();
+    }
+
+    public function dateRevenue($date)
+    {
+        return $this->orderRepository->dateRevenue($date);
+    }
 }

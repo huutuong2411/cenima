@@ -1,13 +1,13 @@
  @extends('user.layout.main')
-@section('title')
-Chot Movie - đặt vé phim online
-@endsection
+ @section('title')
+ Chot Movie - đặt vé phim online
+ @endsection
  @section('content')
  <!-- hero area start -->
  <section class="hero-area" id="home">
      <div class="container">
          <div class="hero-area-slider">
-            @foreach($movie as $value)
+             @foreach($movie as $value)
              <div class="row hero-area-slide">
                  <div class="col-lg-6 col-md-5 single-portfolio">
                      <div class="hero-area-content">
@@ -19,7 +19,9 @@ Chot Movie - đặt vé phim online
                  </div>
                  <div class="col-lg-6 col-md-7">
                      <div class="hero-area-content pr-50">
-                         <a href="{{route('user.movie_show',['id'=>$value->id])}}"><h2>{{$value->name}}</h2></a>
+                         <a href="{{route('user.movie_show',['id'=>$value->id])}}">
+                             <h2>{{$value->name}}</h2>
+                         </a>
                          <div class="review">
                              <div class="author-review">
                                  <i class="icofont icofont-star"></i>
@@ -56,14 +58,14 @@ Chot Movie - đặt vé phim online
                              </div>
                          </div>
                          <div class="slide-trailor">
-                             <h3>Khởi chiếu: <h3 class="text-danger">{{date('d/m/Y', strtotime($value->start_date))}}</h3></h3>
+                             <h3>Khởi chiếu: <h3 class="text-danger">{{date('d/m/Y', strtotime($value->start_date))}}</h3>
+                             </h3>
                              <a class="theme-btn" href="{{route('user.movie_show',['id'=>$value->id])}}"><i class="icofont icofont-ticket"></i> Mua vé</a>
-                             <a href="{{ route('admin.send_web_notification') }}">Test realtime</a>
                          </div>
                      </div>
                  </div>
              </div>
-            @endforeach
+             @endforeach
          </div>
          <div class="hero-area-thumb">
              <div class="thumb-prev">

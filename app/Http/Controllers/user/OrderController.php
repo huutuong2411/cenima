@@ -4,7 +4,6 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Services\OrderService;
-use App\Services\RoomsService;
 use App\Services\ShowtimeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,14 +14,13 @@ class OrderController extends Controller
 
     protected ShowtimeService $showtimeService;
 
-    public function __construct(OrderService $orderService, ShowtimeService $showtimeService, RoomsService $roomsService)
+    public function __construct(OrderService $orderService, ShowtimeService $showtimeService)
     {
         $this->orderService = $orderService;
         $this->showtimeService = $showtimeService;
-        $this->roomsService = $roomsService;
     }
 
-    public function getlistTicket()
+    public function getListMyTicket()
     {
         $userID = Auth::user()->id;
         $orders = $this->orderService->whereUserID($userID);
@@ -62,7 +60,6 @@ class OrderController extends Controller
         }
         if (!empty($duplicateSeats)) {
             $duplicateSeats = implode(', ', $duplicateSeats);
-
             return redirect()->back()->with('error', __('Ghế ' . $duplicateSeats . ' đã có người đặt, vui lòng chọn ghế khác'));
         }
         //tiến hành lưu
@@ -71,10 +68,11 @@ class OrderController extends Controller
             'user_id' => Auth::user()->id,
             'ticket' => json_encode($seats),
             'total' => $total,
+            'quantity' => $seatCount,
         ];
         $saveNewOrder = $this->orderService->createOrder($data);
         if ($saveNewOrder) {
-            return redirect()->route('user.show_ticket', ['id' => $saveNewOrder->id])->with('success', __('Đặt vé thành công'));
+            return redirect()->route('user.send_web_notification', ['id' => $saveNewOrder->id]);
         } else {
             return redirect()->back()->with('error', __('Đặt vé không thành công'));
         }

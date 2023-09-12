@@ -55,4 +55,9 @@ class MovieService
     {
         return $this->movieRepository->whereDate($date);
     }
+
+    public function getMovieAndSales()
+    {
+        return $this->movieRepository->getMovieAndSales();
+    }
 }
