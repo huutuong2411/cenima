@@ -38,10 +38,21 @@ class OrderRepository extends BaseRepository implements OrderInterface
             ->sum('total');
     }
 
+    public function movieMonthRevenue($movieId, $month, $year)
+    {
+        return $this->model
+            ->join('showtime', 'order.id_showtime', '=', 'showtime.id')
+            ->whereMonth('showtime.updated_at', $month)
+            ->whereYear('showtime.updated_at', $year)
+            ->where('showtime.id_movie', $movieId)
+            ->sum('order.total');
+    }
+
     public function weekRevenue()
     {
         $today = Carbon::now();
         $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
+
         return $this->model
             ->whereBetween('created_at', [$startOfWeek, $today])
             ->sum('total');
@@ -52,6 +63,15 @@ class OrderRepository extends BaseRepository implements OrderInterface
         return $this->model
             ->whereDate('created_at', $date)
             ->sum('total');
+    }
+
+    public function movieDateRevenue($movieId, $date)
+    {
+        return $this->model
+            ->join('showtime', 'order.id_showtime', '=', 'showtime.id')
+            ->whereDate('showtime.updated_at', $date)
+            ->where('showtime.id_movie', $movieId)
+            ->sum('order.total');
     }
 
     public function getListYears()

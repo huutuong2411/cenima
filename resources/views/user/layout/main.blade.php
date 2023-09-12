@@ -77,7 +77,7 @@
     @include('user.layout.header')
     <div class="buy-ticket">
         <div class="container">
-            <div class="buy-ticket-area">
+            <div class="buy-ticket-area border border-danger rounded">
                 <a href="#"><i class="icofont icofont-close"></i></a>
                 <form action="{{route('user.create_order')}}" method="post">
                     @csrf

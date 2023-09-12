@@ -124,7 +124,10 @@ Thống kê - Báo Cáo
                     <option value="november">Tháng 11</option>
                     <option value="december">Tháng 12</option>
                 </select>
-
+                <span>Chọn  phim:</span>
+                <select  class="form-control form-control-sm col-2" name="" id="changeMovie">
+                             <option value="">--Chọn--</option>  
+                </select>
 
 
                 <!-- kết thúc doanh thu theo từng tháng -->
@@ -267,7 +270,10 @@ Thống kê - Báo Cáo
                     year: year, // giá trị value Year
                 },
                 success: function(data) { // nhận kết quả trả về
-                    console.log(data);
+                    $.each(data.list_movie, function(index, movie) {
+                        // thêm các option phòng mới vào
+                        $('#changeMovie').append('<option value="' + movie.id + '">' + movie.name + '</option>');
+                    });
                     if (data.listday) {
                         myLineChart.data.datasets[0].data = data.dayEarn;
                         myLineChart.data.labels = data.listday;
@@ -275,7 +281,37 @@ Thống kê - Báo Cáo
                         myLineChart.data.datasets[0].data = data;
                         myLineChart.data.labels = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
                     }
+                    myLineChart.update();
+                }
+            }); // đấu đóng ajax
 
+        });
+
+        // xử lý thống kê theo tháng trong năm
+        $('#changeMovie').change(function() {
+            var movie = $('#changeMonth').val();
+            var month = $('#changeYear').val();
+            var year = $('#changeYear').val();
+            // Bắt đầu gửi AJAX
+            $.ajax({
+                url: "{{route('admin.dashboard_earning')}}", // đường dẫn đến controller
+                method: 'GET', // phương thức GET
+                data: { // dữ liệu gửi đi
+                    month: month, // giá trị value month
+                    year: year, // giá trị value Year
+                },
+                success: function(data) { // nhận kết quả trả về
+                    $.each(data.list_movie, function(index, movie) {
+                        // thêm các option phòng mới vào
+                        $('#changeMovie').append('<option value="' + movie.id + '">' + movie.name + '</option>');
+                    });
+                    if (data.listday) {
+                        myLineChart.data.datasets[0].data = data.dayEarn;
+                        myLineChart.data.labels = data.listday;
+                    } else { // nếu không chọn month thì dữ liệu sẽ trả về doanh thu năm
+                        myLineChart.data.datasets[0].data = data;
+                        myLineChart.data.labels = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+                    }
                     myLineChart.update();
                 }
             }); // đấu đóng ajax

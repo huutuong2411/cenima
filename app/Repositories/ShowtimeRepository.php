@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\admin\Showtime;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class ExampleRepository.
@@ -80,5 +81,18 @@ class ShowtimeRepository extends BaseRepository implements ShowtimeInterface
     public function showTimeByMovieDate($roomID, $date, $idMovie)
     {
         return $this->model->whereIn('id_room', $roomID)->where('id_movie', $idMovie)->where('date', $date)->get();
+    }
+
+    public function nameMovieByMonthYear($month, $year)
+    {
+        $month = date('m', strtotime($month));
+
+        return $this->model
+            ->select('movie.name', DB::raw('MAX(movie.id) as id'))
+            ->whereMonth('showtime.updated_at', $month)
+            ->whereYear('showtime.updated_at', $year)
+            ->join('movie', 'showtime.id_movie', '=', 'movie.id')
+            ->groupBy('movie.name')
+            ->get();
     }
 }

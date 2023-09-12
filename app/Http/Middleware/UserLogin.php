@@ -21,7 +21,7 @@ class UserLogin
         if (Auth::check() && Auth::user()->id_role == 1) {
             return $next($request);
         } else {
-            return redirect()->route('user.login');;
+            return redirect()->route('user.login');
         }
     }
 }

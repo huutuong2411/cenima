@@ -10,7 +10,7 @@ class AuthAdminController extends Controller
 {
     public function index()
     {
-        if (!Auth::check()) {
+        if (!Auth::check() || Auth::user()->id_role != 2) {
             return view('admin.login');
         } else {
             return redirect()->route('admin.dashboard');

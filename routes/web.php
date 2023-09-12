@@ -6,13 +6,14 @@ use App\Http\Controllers\admin\AdminMovieController;
 use App\Http\Controllers\admin\AdminRoomsController;
 use App\Http\Controllers\admin\AdminShowTimeController;
 use App\Http\Controllers\admin\AdminTheatersController;
-use App\Http\Controllers\admin\AuthAdminController;
 use App\Http\Controllers\admin\AdminTicketController;
+use App\Http\Controllers\admin\AuthAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotificationSendController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\MovieController;
+use App\Http\Controllers\user\OnlinePaymentController;
 use App\Http\Controllers\user\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +58,10 @@ Route::group([
         Route::post('createOrder', [OrderController::class, 'createOrder'])->name('create_order');
         Route::get('order/{id}/ticket', [OrderController::class, 'showTicket'])->name('show_ticket');
         Route::get('order/myticket', [OrderController::class, 'getListMyTicket'])->name('get_list_my_ticket');
+        Route::get('/order/VNPAY-check', [OrderController::class, 'vnPayCheck'])->name('vnPayCheck');
+        // //online payment
+        // Route::get('/online-payment', [OnlinePaymentController::class, 'index'])->name('online_payment');
+        // Route::get('/ketquaMoMo', [OnlinePaymentController::class, 'ket_qua_momo'])->name('ket_qua_momo');
         // realtime
         Route::get('/{id}/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send_web_notification');
     });
@@ -79,7 +84,6 @@ Route::group([
 ], function () {
     Route::get('/login', [AuthAdminController::class, 'index'])->name('login');
     Route::post('/login', [AuthAdminController::class, 'login'])->name('login.post');
-
     Route::group([
         'middleware' => 'AdminLogin',
     ], function () {

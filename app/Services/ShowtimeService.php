@@ -85,4 +85,9 @@ class ShowtimeService
     {
         return $this->showtimeRepository->showTimeByMovieDate($roomID, $date, $idMovie);
     }
+
+    public function nameMovieByMonthYear($month, $year)
+    {
+        return $this->showtimeRepository->nameMovieByMonthYear($month, $year);
+    }
 }

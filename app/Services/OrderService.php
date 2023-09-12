@@ -61,6 +61,11 @@ class OrderService
         return $this->orderRepository->Monthrevenue($month, $year);
     }
 
+    public function movieMonthRevenue($movieId, $month, $year)
+    {
+        return $this->orderRepository->movieRevenue($movieId, $month, $year);
+    }
+
     public function weekRevenue()
     {
         return $this->orderRepository->Weekrevenue();
@@ -74,5 +79,10 @@ class OrderService
     public function dateRevenue($date)
     {
         return $this->orderRepository->dateRevenue($date);
+    }
+
+    public function movieDateRevenue($movieId, $date)
+    {
+        return $this->orderRepository->movieDateRevenue($movieId, $date);
     }
 }

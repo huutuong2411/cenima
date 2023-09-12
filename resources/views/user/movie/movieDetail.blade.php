@@ -82,7 +82,7 @@
                 <div class="details-content">
                     <div class="details-overview ">
                         <h2>Chọn suất chiếu</h2>
-                        <div class="buy-ticket-area mt-1 p-2 card mb-4">
+                        <div class="buy-ticket-area mt-1 p-2 mb-4 rounded border border-danger">
                             <div class="card-body">
                                 <div class="mb-3 row">
                                     <div class="col-4">

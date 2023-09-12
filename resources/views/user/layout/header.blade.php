@@ -20,7 +20,7 @@
                     <li><a class="" href="{{route('user.login')}}">Login</a></li>
                     @else
                     <li><a href="#">{{Auth::user()->name}}</a></li>
-                    <li><a class="" href="{{route('user.login')}}">LogOut</a></li>
+                    <li><a class="" href="{{route('user.logout')}}">LogOut</a></li>
                     @endif
                 </ul>
             </div>

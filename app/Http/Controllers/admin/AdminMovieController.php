@@ -24,6 +24,7 @@ class AdminMovieController extends Controller
     public function index()
     {
         $movie = $this->movieService->getMovieAndSales();
+
         return view('admin.movie.movie', compact('movie'));
     }
 
