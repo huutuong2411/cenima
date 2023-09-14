@@ -84,7 +84,8 @@ class ShowtimeRepository extends BaseRepository implements ShowtimeInterface
     public function showTimeByMovieDate($roomID, $date, $idMovie)
     {
         $tenMinutesAgo = Carbon::now()->addMinutes(10)->format('H:i:s');
-        return $this->model->whereIn('id_room', $roomID)->where('id_movie', $idMovie)->where('date', $date)->whereTime('start_at', '>', $tenMinutesAgo)->get();
+        // ->whereTime('start_at', '>', $tenMinutesAgo)
+        return $this->model->whereIn('id_room', $roomID)->where('id_movie', $idMovie)->where('date', $date)->get();
     }
 
     public function nameMovieByMonthYear($month, $year)
@@ -118,6 +119,7 @@ class ShowtimeRepository extends BaseRepository implements ShowtimeInterface
             ->join('users', 'order.user_id', '=', 'users.id')
             ->whereRaw("DATE_FORMAT(showtime.start_at, '%H:%i') = ?", ["$addtimeHM"])
             ->whereDate('showtime.date', $currentTime->toDateString())
+            ->groupBy('users.email')
             ->pluck('users.email');
     }
 }

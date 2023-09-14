@@ -2,12 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use carbon\Carbon;
+use App\Jobs\SendMovieReminderEmailJob;
 use App\Services\ShowtimeService;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class SendMovieReminderEmail extends Command
 {
@@ -17,8 +15,12 @@ class SendMovieReminderEmail extends Command
      * @var string
      */
     protected $signature = 'order:reminder';
+
     protected ShowtimeService $showtimeService;
 
+    protected $subject = 'Nhắc xem phim';
+
+    protected $mailTemplate = 'email.reminder_email'; // truyền template vào cho cái queue job
 
     public function __construct(ShowtimeService $showtimeService)
     {
@@ -30,7 +32,6 @@ class SendMovieReminderEmail extends Command
      *
      * @var string
      */
-    protected $description = 'Nhắc xem phim';
 
     /**
      * Execute the console command.
@@ -40,24 +41,14 @@ class SendMovieReminderEmail extends Command
     public function handle()
     {
         // Lấy tất cả suất chiếu bắt đầu trong vòng 30 phút tiếp theo.
-        $currentTime = Carbon::now();
-
-        $addtime = $currentTime->addMinutes(30);
-
-        $showtimes = $this->showtimeService->showtimeByDateTime($addtime->toTimeString(), $currentTime->toDateString());
-
-        $emails = [];
-        foreach ($showtimes as $showtime) {
-            // Kiểm tra xem có tồn tại biến order trong suất chiếu
-            if ($showtime->order) {
-                $user = $showtime->order->user;
-                $emails[] = $user->email;
-            }
+        $listEmails = $this->showtimeService->userEmailFromShowtime();
+        // Đặt log thời gian start, thời gian end
+        Log::info('--------Mail sender job start--------');
+        // Log list user trước khi sned
+        Log::info('List sender: ' . $listEmails);
+        foreach ($listEmails as $email) {
+            dispatch(new SendMovieReminderEmailJob($email, $this->subject, $this->mailTemplate));
         }
-
-        // Gửi email tới danh sách $emails
-        Mail::send('email.reminder_email', [], function ($message) use ($emails) {
-            $message->to($emails)->subject('Nhắc xem phim');
-        });
+        Log::info('--------Mail sender job end--------');
     }
 }

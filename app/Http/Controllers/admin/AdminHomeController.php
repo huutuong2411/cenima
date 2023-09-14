@@ -50,6 +50,7 @@ class AdminHomeController extends Controller
             $thismonthEarn = $this->orderService->monthRevenue($i, date('Y'));
             $monthEarn[] = $thismonthEarn;
         }
+
         return view('admin.dashboard', compact('monthRevenue', 'weekRevenue', 'movieCount', 'ticketCount', 'yearList', 'monthEarn'));
     }
 
@@ -66,7 +67,7 @@ class AdminHomeController extends Controller
             return response()->json($monthEarn);
         }
         // xử lý theo từng tháng:
-        if (!empty($request->year) && !empty($request->month)) {
+        if (!empty($request->year) && !empty($request->month) && empty($request->movie)) {
             $firstday = new Carbon('first day of ' . $request->month . ' ' . $request->year);
             $lastday = new Carbon('last day of ' . $request->month . ' ' . $request->year);
             $period = CarbonPeriod::create($firstday, $lastday);

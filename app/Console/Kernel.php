@@ -2,9 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\SendMovieReminderEmail;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\SendMovieReminderEmail;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('order:reminder')->cron('* * * * *');
+        $schedule->command('order:reminder')->everyMinute();
     }
 
     /**

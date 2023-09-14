@@ -63,7 +63,7 @@ class OrderService
 
     public function movieMonthRevenue($movieId, $month, $year)
     {
-        return $this->orderRepository->movieRevenue($movieId, $month, $year);
+        return $this->orderRepository->movieMonthRevenue($movieId, $month, $year);
     }
 
     public function weekRevenue()

@@ -270,8 +270,11 @@ Thống kê - Báo Cáo
                     year: year, // giá trị value Year
                 },
                 success: function(data) { // nhận kết quả trả về
+                    $('#changeMovie').html('');
+                    $('#changeMovie').html("<option value='" + "' >--Chọn--</option>");
                     $.each(data.list_movie, function(index, movie) {
                         // thêm các option phòng mới vào
+                        
                         $('#changeMovie').append('<option value="' + movie.id + '">' + movie.name + '</option>');
                     });
                     if (data.listday) {
@@ -289,8 +292,8 @@ Thống kê - Báo Cáo
 
         // xử lý thống kê theo tháng trong năm
         $('#changeMovie').change(function() {
-            var movie = $('#changeMonth').val();
-            var month = $('#changeYear').val();
+            var movie = $(this).val();
+            var month = $('#changeMonth').val();
             var year = $('#changeYear').val();
             // Bắt đầu gửi AJAX
             $.ajax({
@@ -299,13 +302,9 @@ Thống kê - Báo Cáo
                 data: { // dữ liệu gửi đi
                     month: month, // giá trị value month
                     year: year, // giá trị value Year
+                    movie:movie,
                 },
                 success: function(data) { // nhận kết quả trả về
-                    $('#changeMovie').html("<option value='" + "' >--Chọn--</option>");
-                    $.each(data.list_movie, function(index, movie) {
-                        // thêm các option phòng mới vào
-                        $('#changeMovie').append('<option value="' + movie.id + '">' + movie.name + '</option>');
-                    });
                     if (data.listday) {
                         myLineChart.data.datasets[0].data = data.dayEarn;
                         myLineChart.data.labels = data.listday;

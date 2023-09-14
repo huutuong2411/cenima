@@ -105,6 +105,7 @@ class AdminCategoriesController extends Controller
 
         return redirect()->back()->with('delete', __('Đã xoá danh mục thành công'));
     }
+
     // thùng rác
     public function trash()
     {
@@ -112,6 +113,7 @@ class AdminCategoriesController extends Controller
 
         return view('admin.categories.trash', compact('trash'));
     }
+
     // // khôi phục category
     public function restore($id)
     {

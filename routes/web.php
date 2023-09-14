@@ -66,7 +66,6 @@ Route::get('/notfound', function () {
     return view('404.404');
 });
 
-
 //-------Admin-----
 Route::group([
     'prefix' => 'admin',

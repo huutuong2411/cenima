@@ -159,6 +159,7 @@ class AdminShowTimeController extends Controller
 
         return redirect()->back()->with('delete', __('Đã xoá danh mục thành công'));
     }
+
     // thùng rác
     public function trash()
     {
@@ -166,6 +167,7 @@ class AdminShowTimeController extends Controller
 
         return view('admin.showtime.trash', compact('trash'));
     }
+
     // // khôi phục category
     public function restore($id)
     {
