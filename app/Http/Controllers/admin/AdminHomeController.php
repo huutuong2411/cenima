@@ -50,7 +50,6 @@ class AdminHomeController extends Controller
             $thismonthEarn = $this->orderService->monthRevenue($i, date('Y'));
             $monthEarn[] = $thismonthEarn;
         }
-
         return view('admin.dashboard', compact('monthRevenue', 'weekRevenue', 'movieCount', 'ticketCount', 'yearList', 'monthEarn'));
     }
 

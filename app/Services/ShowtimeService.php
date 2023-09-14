@@ -71,7 +71,7 @@ class ShowtimeService
         return $this->showtimeRepository->ShowtimeByTheater();
     }
 
-    public function showTimeByIdRoom($roomID, $date)
+    public function showTimeByIdRoom(array $roomID, $date)
     {
         return $this->showtimeRepository->showTimeByIdRoom($roomID, $date);
     }
@@ -89,5 +89,15 @@ class ShowtimeService
     public function nameMovieByMonthYear($month, $year)
     {
         return $this->showtimeRepository->nameMovieByMonthYear($month, $year);
+    }
+
+    public function showtimeByDateTime($time, $date)
+    {
+        return $this->showtimeRepository->showtimeByDateTime($time, $date);
+    }
+
+    public function userEmailFromShowtime()
+    {
+        return $this->showtimeRepository->userEmailFromShowtime();
     }
 }

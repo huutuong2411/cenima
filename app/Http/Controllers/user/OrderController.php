@@ -9,7 +9,7 @@ use App\Utilities\VNPay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -63,7 +63,6 @@ class OrderController extends Controller
         }
         if (!empty($duplicateSeats)) {
             $duplicateSeats = implode(', ', $duplicateSeats);
-
             return redirect()->back()->with('error', __('Ghế ' . $duplicateSeats . ' đã có người đặt, vui lòng chọn ghế khác'));
         }
         //tiến hành lưu
@@ -116,7 +115,7 @@ class OrderController extends Controller
     public function showTicket($id)
     {
         $order = $this->orderService->findOrder($id);
-
+        dd($order);
         return view('user.ticket.ticket', compact('order'));
     }
 

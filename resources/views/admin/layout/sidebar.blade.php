@@ -30,8 +30,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="{{Request::is('admin/theaters*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.theaters')}}">QL rạp chiếu</a>
-                <a class="{{Request::is('admin/showtime*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.showtime')}}">QL suất chiếu</a>
                 <a class="{{Request::is('admin/rooms*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.rooms')}}">QL phòng chiếu</a>
+                <a class="{{Request::is('admin/showtime*') ? 'collapse-item active' : 'collapse-item'}}" href="{{route('admin.showtime')}}">QL suất chiếu</a>
             </div>
         </div>
     </li>
@@ -59,10 +59,10 @@
             <i class="fas fa-solid fa-truck"></i>
             <span>Quản lý vé</span></a>
     </li>
-    <li class="{{Request::is('admin/user*') ? 'nav-item active' : 'nav-item'}}">
-        <a class="nav-link" href="">
+    <li class="{{Request::is('admin/register-device*') ? 'nav-item active' : 'nav-item'}}">
+        <a class="nav-link" href="{{route('admin.register_device')}}">
             <i class="fas fa-solid fa-users"></i>
-            <span>Quản lý nhân viên</span></a>
+            <span>Đăng ký thiết bị nhân thông báo</span></a>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

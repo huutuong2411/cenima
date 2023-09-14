@@ -124,9 +124,9 @@ Thống kê - Báo Cáo
                     <option value="november">Tháng 11</option>
                     <option value="december">Tháng 12</option>
                 </select>
-                <span>Chọn  phim:</span>
-                <select  class="form-control form-control-sm col-2" name="" id="changeMovie">
-                             <option value="">--Chọn--</option>  
+                <span>Chọn phim:</span>
+                <select class="form-control form-control-sm col-2" name="" id="changeMovie">
+                    <option value="">--Chọn--</option>
                 </select>
 
 
@@ -165,7 +165,7 @@ Thống kê - Báo Cáo
                     pointHoverBorderColor: "rgba(246,194,62,1)",
                     pointHitRadius: 10,
                     pointBorderWidth: 2,
-                    data: @json($monthEarn)
+                    data: @json($monthEarn),
                 }],
             },
             options: {
@@ -301,6 +301,7 @@ Thống kê - Báo Cáo
                     year: year, // giá trị value Year
                 },
                 success: function(data) { // nhận kết quả trả về
+                    $('#changeMovie').html("<option value='" + "' >--Chọn--</option>");
                     $.each(data.list_movie, function(index, movie) {
                         // thêm các option phòng mới vào
                         $('#changeMovie').append('<option value="' + movie.id + '">' + movie.name + '</option>');

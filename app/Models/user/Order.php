@@ -18,6 +18,7 @@ class Order extends Model
         'user_id',
         'id_showtime',
         'ticket',
+        'quantity',
         'total',
     ];
 

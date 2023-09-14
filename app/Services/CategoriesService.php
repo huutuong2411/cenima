@@ -40,4 +40,14 @@ class CategoriesService
     {
         return $this->categoriesRepository->delete($id);
     }
+
+    public function CategoryTrash()
+    {
+        return $this->categoriesRepository->onlyTrashed();
+    }
+
+    public function restoreCategory($id)
+    {
+        return $this->categoriesRepository->restore($id);
+    }
 }

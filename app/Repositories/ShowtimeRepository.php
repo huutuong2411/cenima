@@ -48,9 +48,12 @@ class ShowtimeRepository extends BaseRepository implements ShowtimeInterface
             ->get();
     }
 
-    public function showTimeByIdRoom($roomID, $date)
+    public function showTimeByIdRoom(array $roomID, $date)
     {
-        return $this->model->whereIn('id_room', $roomID)->where('date', $date)->get()->groupBy('id_room');
+        return $this->model->where(function ($query) use ($roomID, $date) {
+            $query->whereIn('id_room', $roomID)
+                ->orWhere('date', $date);
+        })->get();
     }
 
     public function dateByRoomAndIdMovie($roomID, $idMovie)
@@ -80,7 +83,8 @@ class ShowtimeRepository extends BaseRepository implements ShowtimeInterface
 
     public function showTimeByMovieDate($roomID, $date, $idMovie)
     {
-        return $this->model->whereIn('id_room', $roomID)->where('id_movie', $idMovie)->where('date', $date)->get();
+        $tenMinutesAgo = Carbon::now()->addMinutes(10)->format('H:i:s');
+        return $this->model->whereIn('id_room', $roomID)->where('id_movie', $idMovie)->where('date', $date)->whereTime('start_at', '>', $tenMinutesAgo)->get();
     }
 
     public function nameMovieByMonthYear($month, $year)
@@ -94,5 +98,26 @@ class ShowtimeRepository extends BaseRepository implements ShowtimeInterface
             ->join('movie', 'showtime.id_movie', '=', 'movie.id')
             ->groupBy('movie.name')
             ->get();
+    }
+
+    public function showtimeByDateTime($time, $date)
+    {
+        return $this->model->where('start_at', $time)
+            ->where('date', $date)
+            ->get();
+    }
+
+    public function userEmailFromShowtime()
+    {
+        $currentTime = Carbon::now();
+        $addtime = $currentTime->addMinutes(30);
+        $addtimeHM = $addtime->format('H:i');
+
+        return $this->model->select('users.email')
+            ->join('order', 'showtime.id', '=', 'order.id_showtime')
+            ->join('users', 'order.user_id', '=', 'users.id')
+            ->whereRaw("DATE_FORMAT(showtime.start_at, '%H:%i') = ?", ["$addtimeHM"])
+            ->whereDate('showtime.date', $currentTime->toDateString())
+            ->pluck('users.email');
     }
 }

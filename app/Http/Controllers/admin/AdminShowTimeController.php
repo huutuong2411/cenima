@@ -24,12 +24,13 @@ class AdminShowTimeController extends Controller
 
     protected RoomsService $roomsService;
 
-    public function __construct(ShowtimeService $showtimeService,
+    public function __construct(
+        ShowtimeService $showtimeService,
         CitiesService $citiesService,
         MovieService $movieService,
         TheatersService $theatersService,
-        RoomsService $roomsService)
-    {
+        RoomsService $roomsService
+    ) {
         $this->showtimeService = $showtimeService;
         $this->citiesService = $citiesService;
         $this->movieService = $movieService;
@@ -105,7 +106,8 @@ class AdminShowTimeController extends Controller
             for ($i = 0; $i < count($startTime); $i++) {
                 if ($i != $index) {
                     if (($start >= $startTime[$i] && $start <= $endTime[$i]) ||
-                        ($end >= $startTime[$i] && $end <= $endTime[$i])) {
+                        ($end >= $startTime[$i] && $end <= $endTime[$i])
+                    ) {
                         $flag = true;
                         break;
                     }
@@ -138,9 +140,11 @@ class AdminShowTimeController extends Controller
     public function show($idTheater, $date)
     {
         $roomID = $this->roomsService->getShowTimeByTheater($idTheater)->pluck('id');
-
+        $roomID = $roomID->toArray();
         $showtime = $this->showtimeService->showTimeByIdRoom($roomID, $date);
-        dd($showtime);
+        $theater = $this->theatersService->findTheater($idTheater);
+
+        return view('admin.showtime.showtime-detail', compact('showtime', 'theater'));
     }
 
     /**
@@ -149,31 +153,24 @@ class AdminShowTimeController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $this->showtimeService->deleteShowtime($id);
+
+        return redirect()->back()->with('delete', __('Đã xoá danh mục thành công'));
+    }
+    // thùng rác
+    public function trash()
+    {
+        $trash = $this->showtimeService->showtimeTrash();
+
+        return view('admin.showtime.trash', compact('trash'));
+    }
+    // // khôi phục category
+    public function restore($id)
+    {
+        $this->showtimeService->restoreShowtime($id);
+
+        return redirect()->back()->with('success', __('khôi phục thành công'));
     }
 }

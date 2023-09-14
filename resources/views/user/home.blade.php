@@ -201,10 +201,9 @@
              <div class="col-lg-6 text-center text-lg-right">
                  <div class="portfolio-menu">
                      <ul>
-                         <li data-filter="*" class="active">Latest</li>
-                         <li data-filter=".soon">Comming Soon</li>
-                         <li data-filter=".top">Top Rated</li>
-                         <li data-filter=".released">Recently Released</li>
+                         <li data-filter="*" class="active">Mới nhất</li>
+                         <li data-filter=".soon">Sắp chiếu</li>
+                         <li data-filter=".top">Bán chạy nhất</li>
                      </ul>
                  </div>
              </div>

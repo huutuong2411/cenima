@@ -22,8 +22,7 @@ class MovieRepository extends BaseRepository implements MovieInterface
 
     public function whereDate($date)
     {
-        $data = $this->model->whereDate('start_date', '<=', $date)
-            ->get();
+        $data = $this->model->whereDate('start_date', '<=', $date)->get();
 
         return $data;
     }

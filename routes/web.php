@@ -10,12 +10,9 @@ use App\Http\Controllers\admin\AdminTicketController;
 use App\Http\Controllers\admin\AuthAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotificationSendController;
-use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\MovieController;
-use App\Http\Controllers\user\OnlinePaymentController;
 use App\Http\Controllers\user\OrderController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,25 +56,18 @@ Route::group([
         Route::get('order/{id}/ticket', [OrderController::class, 'showTicket'])->name('show_ticket');
         Route::get('order/myticket', [OrderController::class, 'getListMyTicket'])->name('get_list_my_ticket');
         Route::get('/order/VNPAY-check', [OrderController::class, 'vnPayCheck'])->name('vnPayCheck');
-        // //online payment
-        // Route::get('/online-payment', [OnlinePaymentController::class, 'index'])->name('online_payment');
-        // Route::get('/ketquaMoMo', [OnlinePaymentController::class, 'ket_qua_momo'])->name('ket_qua_momo');
-        // realtime
+        // realtime thông báo tới admin
         Route::get('/{id}/send-web-notification', [NotificationSendController::class, 'sendNotification'])->name('send_web_notification');
     });
 });
 
-// users
-Route::resource('users', UserController::class);
-// test send mail spam
-Route::get('/send-mail', [SendEmailController::class, 'getSendEmail'])->name('get_send_email');
-Route::post('/send-mail', [SendEmailController::class, 'postSendEmail'])->name('post_send_email');
-
-//404 not found
+//----404 not found
 Route::get('/notfound', function () {
     return view('404.404');
 });
 
+
+//-------Admin-----
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
@@ -87,12 +77,12 @@ Route::group([
     Route::group([
         'middleware' => 'AdminLogin',
     ], function () {
-        Route::get('/home', function () {
-            return view('admin.home');
-        });
-        Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store.token');
+        // đăng ký thiết bị nhận thông báo
+        Route::get('/register-device', [NotificationSendController::class, 'index'])->name('register_device');
+        Route::post('/store-token', [NotificationSendController::class, 'updateDeviceToken'])->name('store_token');
 
         Route::get('/logout', [AuthAdminController::class, 'logout'])->name('logout');
+        // trang dashboard
         Route::get('/dashboard', [AdminHomeController::class, 'index'])->name('dashboard'); //snake_case;
         Route::get('/earning', [AdminHomeController::class, 'Earning'])->name('dashboard_earning');
         Route::get('/bestseller', [AdminHomeController::class, 'bestseller'])->name('dashboard_bestseller');
@@ -107,7 +97,6 @@ Route::group([
             Route::get('/trash', [AdminCategoriesController::class, 'trash'])->name('trash_categories');
             Route::get('/{id}/restore', [AdminCategoriesController::class, 'restore'])->name('categories_restore');
         });
-
         //theaters
         Route::group([
             'prefix' => 'theaters',
@@ -119,7 +108,6 @@ Route::group([
             Route::get('/{id}/delete', [AdminTheatersController::class, 'destroy'])->name('theaters_delete');
             Route::get('/{id}/restore', [AdminTheatersController::class, 'restore'])->name('theaters_restore');
         });
-
         //rooms
         Route::group([
             'prefix' => 'rooms',
@@ -148,7 +136,6 @@ Route::group([
             Route::get('/trash', [AdminMovieController::class, 'trash'])->name('movies_trash');
             Route::get('/{id}/restore', [AdminMovieController::class, 'restore'])->name('movies_restore');
         });
-
         // showtime
         Route::group([
             'prefix' => 'showtime',
@@ -159,11 +146,11 @@ Route::group([
             Route::post('/', [AdminShowTimeController::class, 'store'])->name('showtime_add');
             Route::get('/{idTheater}/{date}', [AdminShowTimeController::class, 'show'])->name('showtime_show');
             Route::get('/{id}/edit', [AdminShowTimeController::class, 'edit'])->name('showtime_edit');
-            Route::post('/{id}', [AdminShowTimeController::class, 'update'])->name('showtime_update');
+            // Route::post('/{id}', [AdminShowTimeController::class, 'update'])->name('showtime_update');
             Route::get('/{id}/delete', [AdminShowTimeController::class, 'destroy'])->name('showtime_delete');
+            Route::get('/trash', [AdminShowTimeController::class, 'trash'])->name('showtime_trash');
             Route::get('/{id}/restore', [AdminShowTimeController::class, 'restore'])->name('showtime_restore');
         });
-
         //ticket
         Route::group([
             'prefix' => 'ticket',

@@ -28,7 +28,7 @@ Vé của bạn
             <hr class="text-danger">
             <div>
               <p class="text-danger">Phim:</p>
-              <span>{{$order->showtime->movie->name}}</span>
+              <span></span>
             </div>
             <div>
               <p class="text-danger">Tên khách hàng:</p>

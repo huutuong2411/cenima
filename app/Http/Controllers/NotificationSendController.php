@@ -20,6 +20,11 @@ class NotificationSendController extends Controller
         $this->userService = $userService;
     }
 
+    public function index()
+    {
+        return view('admin.notify.register-notify');
+    }
+
     public function updateDeviceToken(Request $request)
     {
         $data = ['device_token' => $request->token];

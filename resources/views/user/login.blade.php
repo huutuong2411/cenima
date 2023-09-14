@@ -31,20 +31,20 @@
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col col-xl-10">
                         <div class="card" style="border-radius: 1rem;">
-                        @if(session('success'))
-                                          <div class="alert alert-success alert-dismissible">
-                                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                          <h4><i class="icon fa fa-check"></i> Thông báo!</h4>
-                              {{session('success')}}
-                                  </div>
-                              @endif
+                            @if(session('success'))
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-check"></i> Thông báo!</h4>
+                                {{session('success')}}
+                            </div>
+                            @endif
                             <div class="row g-0">
                                 <div class=" col-lg-6 d-none d-md-block">
                                     <img src="https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-latest-movie-poster-design-image_163485.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; " />
                                 </div>
                                 <div class=" col-lg-6 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
-                                        
+
                                         <form method="post" action="{{route('user.login_post')}}">
                                             @csrf
                                             <div class="d-flex align-items-center mb-3 pb-1">

@@ -26,7 +26,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Reset password</button>
                     <div class="d-flex justify-content-between mt-4">
-                        <a class="" href="#">Login</a>
+                        <a class="" href="{{route('user.login')}}">Login</a>
                         <a class="" href="#">Register</a>
                     </div>
                 </div>

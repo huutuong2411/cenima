@@ -77,7 +77,7 @@ class AdminRoomsController extends Controller
     {
         $room = $this->roomsService->findRoom($id);
 
-        return view('admin.rooms.roomDetail', compact('room'));
+        return view('admin.rooms.room-detail', compact('room'));
     }
 
     /**

@@ -11,11 +11,15 @@ interface ShowtimeInterface extends RepositoryInterface
 
     public function ShowtimeByTheater();
 
-    public function showTimeByIdRoom($roomID, $date);
+    public function showTimeByIdRoom(array $roomID, $date);
 
     public function dateByRoomAndIdMovie($roomID, $idMovie);
 
     public function showTimeByMovieDate($roomID, $date, $idMovie);
 
     public function nameMovieByMonthYear($month, $year);
+
+    public function showtimeByDateTime($time, $date);
+
+    public function userEmailFromShowtime();
 }
