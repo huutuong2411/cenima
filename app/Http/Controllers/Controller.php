@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 /**
  * @OA\Info(
- *    title="Your super  ApplicationAPI",
+ *    title="LT XiNê  ApplicationAPI",
  *    version="1.0.0",
  * )
  */

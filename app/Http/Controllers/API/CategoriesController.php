@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\CategoriesRequest;
 use App\Http\Resources\Categories as CategoriesResource;
 use App\Services\CategoriesService;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
@@ -17,6 +17,26 @@ class CategoriesController extends Controller
         $this->categoriesService = $categoriesService;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/categories",
+     *     operationId="getCategories",
+     *     tags={"Categories"},
+     *     summary="Get a list of categories",
+     *     description="Get a list of all categories.",
+     *     security={{"passport":{}}},
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="List of categories",
+     *
+     *        @OA\JsonContent()
+     *     ),
+     *
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *
+     * )
+     */
     public function index()
     {
         $categories = $this->categoriesService->getAll();
@@ -42,6 +62,32 @@ class CategoriesController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Post(
+     *     path="/api/categories",
+     *     operationId="createCategory",
+     *     tags={"Categories"},
+     *     summary="Create a new category",
+     *     description="Create a new category.",
+     *     security={{"bearerAuth": {}}},
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(),
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=201,
+     *         description="Category created successfully",
+     *
+     *         @OA\JsonContent(),
+     *     ),
+     *
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(response=422, description="Unprocessable Entity"),
+     * )
+     */
     public function store(CategoriesRequest $request)
     {
         $category = $request->name;
@@ -62,6 +108,35 @@ class CategoriesController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *     path="/api/categories/{id}",
+     *     operationId="getCategoryById",
+     *     tags={"Categories"},
+     *     summary="Get a category by ID",
+     *     description="Get a category by its ID.",
+     *     security={{"bearerAuth": {}}},
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the category",
+     *
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Category details",
+     *
+     *         @OA\JsonContent(),
+     *     ),
+     *
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(response=404, description="Category not found"),
+     * )
      */
     public function show($id)
     {
@@ -93,6 +168,42 @@ class CategoriesController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Put(
+     *     path="/api/categories/{id}",
+     *     operationId="updateCategory",
+     *     tags={"Categories"},
+     *     summary="Update a category",
+     *     description="Update an existing category by its ID.",
+     *     security={{"bearerAuth": {}}},
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the category",
+     *
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(),
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=201,
+     *         description="Category updated successfully",
+     *
+     *         @OA\JsonContent(),
+     *     ),
+     *
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(response=404, description="Category not found"),
+     *     @OA\Response(response=422, description="Unprocessable Entity"),
+     * )
+     */
     public function update(CategoriesRequest $request, $id)
     {
         $category = $request->name;
@@ -115,6 +226,32 @@ class CategoriesController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Delete(
+     *     path="/api/categories/{id}",
+     *     operationId="deleteCategory",
+     *     tags={"Categories"},
+     *     summary="Delete a category",
+     *     description="Delete a category by its ID.",
+     *     security={{"bearerAuth": {}}},
+     *
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the category",
+     *
+     *         @OA\Schema(type="integer"),
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Category deleted successfully",
+     *     ),
+     *     @OA\Response(response=401, description="Unauthorized"),
+     *     @OA\Response(response=404, description="Category not found"),
+     * )
      */
     public function destroy($id)
     {

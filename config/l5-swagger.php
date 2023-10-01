@@ -5,14 +5,14 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                'title' => 'LT xi nê',
             ],
 
             'routes' => [
                 /*
                  * Route for accessing api documentation interface
                 */
-                'api' => 'api/documentation',
+                'api' => 'api/v2/documentation',
             ],
             'paths' => [
                 /*
@@ -178,16 +178,17 @@ return [
 
                 //Open API 3.0 support
                 'passport' => [ // Unique name of security
-                    'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Laravel passport oauth2 security.',
                     'in' => 'header',
+                    'namne' => 'Authorization',
                     'scheme' => 'https',
                     'flows' => [
-                        "password" => [
-                            "authorizationUrl" => config('app.url') . '/oauth/authorize',
-                            "tokenUrl" => config('app.url') . '/oauth/token',
-                            "refreshUrl" => config('app.url') . '/token/refresh',
-                            "scopes" => []
+                        'password' => [
+                            'authorizationUrl' => config('app.url') . '/oauth/authorize',
+                            'tokenUrl' => config('app.url') . '/oauth/token',
+                            'refreshUrl' => config('app.url') . '/token/refresh',
+                            'scopes' => [],
                         ],
                     ],
                 ],
@@ -211,8 +212,8 @@ return [
                         'write'
                     ],
 
-                    'passport' => []
                     */
+                    'passport' => [],
                 ],
             ],
         ],
