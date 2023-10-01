@@ -6,6 +6,7 @@ use App\Http\Requests\admin\CategoriesRequest;
 use App\Http\Resources\Categories as CategoriesResource;
 use App\Services\CategoriesService;
 use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {

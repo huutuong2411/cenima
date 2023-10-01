@@ -182,6 +182,7 @@ return [
 
         Laravel\Passport\PassportServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
+        L5Swagger\L5SwaggerServiceProvider::class
     ],
 
     /*

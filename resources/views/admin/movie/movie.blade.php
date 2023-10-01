@@ -33,7 +33,8 @@ Quản lý Phim
                             <th scope="row">{{$value->id}}</th>
                             <td>{{$value->name}}</td>
                             <td><img style="max-width:100%;" src="{{asset('/admin/assets/img/movies/'.$value->image)}}"></td>
-                            <td>{{$value->categories->name}}</td>
+                            <td>{{$value->categories->name}}
+                            </td>
                             <td>{{$value->time}} phút</td>
                             <td>{{$value->total_sales}}</td>
                             <td style="text-align: center">
