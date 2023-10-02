@@ -42,9 +42,9 @@ class UserService
         return $this->userRepository->createUser($filter);
     }
 
-    public function findbyEmail($email)
+    public function findUserByEmail($email)
     {
-        return $this->userRepository->findOneBy($email);
+        return $this->userRepository->findUserByEmail($email);
     }
 
     public function updateUser($id, $filter)

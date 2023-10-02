@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('reset-password', [AuthController::class, 'sendMail']);
+Route::get('reset/{token}', [AuthController::class, 'reset']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('categories', [CategoriesController::class, 'index'])->middleware('can:isAdmin');
@@ -30,3 +32,4 @@ Route::middleware('auth:api')->group(function () {
     Route::put('categories/{id}', [CategoriesController::class, 'update']);
     Route::delete('categories/{id}', [CategoriesController::class, 'destroy']);
 });
+

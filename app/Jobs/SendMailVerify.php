@@ -41,9 +41,13 @@ class SendMailVerify implements ShouldQueue
      */
     public function handle()
     {
-        Mail::send($this->view, ['token' => $this->token], function ($message) {
-            $message->to($this->email);
-            $message->subject($this->subject);
-        });
+        $url = url('reset-password/?token=' . $this->token);
+
+        $message = (new MailMessage)
+            ->line('You are receiving this email because we received a password reset request for your account.')
+            ->action('Reset Password', url($url))
+            ->line('If you did not request a password reset, no further action is required.');
+    
+        Mail::to($this->user->email)->send($message);
     }
 }

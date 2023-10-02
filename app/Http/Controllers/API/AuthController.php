@@ -8,6 +8,10 @@ use App\Http\Requests\LoginRequest;
 use App\Services\UserService;
 use App\Traits\APIResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Services\AuthService;
+use App\Notifications\ResetPasswordRequest;
 
 class AuthController extends Controller
 {
@@ -64,7 +68,9 @@ class AuthController extends Controller
      * )
      */
     use APIResponse;
+  
 
+    protected AuthService $authService;
     protected UserService $userService;
 
     /**
@@ -72,9 +78,10 @@ class AuthController extends Controller
      *
      * @param UserService $exampleService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService,AuthService $authService)
     {
         $this->userService = $userService;
+        $this->authService = $authService;
     }
 
     public function register(AuthRequest $request)
@@ -156,6 +163,51 @@ class AuthController extends Controller
             return $this->responseSuccessWithData($success);
         } else {
             return $this->responseError('Unauthorised');
+        }
+    }
+
+
+    public function sendMail(Request $request)
+    {
+        $email = $request->email;
+        $findEmail = $this->userService->findUserByEmail( $email);
+        $token = Str::random(64);
+        if ($findEmail) {
+            $this->authService->createPasswordResset([
+                'email' => $email,
+                'token' => $token,
+            ]);
+          
+            $findEmail->notify(new ResetPasswordRequest($token));
+            return response()->json([
+                'message' => 'We have e-mailed your password reset link!'
+                ]);
+        } 
+    }
+
+    public function reset(Request $request, $token)
+    {
+        $verifyPassword = $this->authService->findResetPassword(['token' => $token]);
+        if (!$verifyPassword) {
+            return response()->json([
+              'message' => 'This password reset token is invalid.'
+                ]);
+        }else{
+            $id = $this->userService->findUserByEmail($verifyPassword->email)->id;
+            $timeDifference = now()->diffInMinutes($verifyPassword->updated_at);
+            if ($timeDifference > 5) {
+                //nhớ xoá token
+                return response()->json([
+                    'message' => 'This password reset token is expire'
+                      ]);
+            } 
+            else {
+                return response([
+                    'code' => $token,
+                    'message' => trans('passwords.code_is_valid')
+                ], 200);
+            }
+
         }
     }
 }
