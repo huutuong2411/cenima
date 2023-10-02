@@ -1,0 +1,26 @@
+
+// ĐỀ TÀI: ĐẶT VÉ XEM PHIM  //
+* phân quyền user, admin:  middleware ,
+- admin :
+    + login, logout
+    + dashboard thống kê theo ngày, tháng, năm ,phim
+    + crud danh mục, rạp phim, phim, suất chiếu, phòng
+    + phòng: logic xử lý sơ đồ ghế
+    + suất chiếu: logic xử lý trùng giờ    
+
+- user:
+    + login, logout, resetpassword [sử dụng queue job send mail
+    + xem thông tin phim
+    + chọn rạp -> suất chiếu
+    + xem được sơ đồ ghế
+    + đặt vé xem phim -> thanh toán online [(sử dụng vnpay sandbox)
+    + logic xử lý: render ghế, lỗi nếu đặt cùng 1 vị trí ghế
+    + Gửi mail nhắc xem phim:  [sử dụng schedule, cron job
+
+* HƯớng phát triển:
+- phân quyền thêm nhân viên
+- thêm chức năng quản lý đồ ăn, thức uống
+- Thêm chức năng realtime chat, comment (xử lý media nếu có thể) 
+=> viết API kết hợp reactjs cho bài cuối kì
+
+*** comment: xoá phim 

@@ -24,7 +24,7 @@ class CategoriesController extends Controller
      *     tags={"Categories"},
      *     summary="Get a list of categories",
      *     description="Get a list of all categories.",
-     *     security={{"passport":{}}},
+     *     security={{"bearer_token":{}}},
      *
      *     @OA\Response(
      *         response=200,
@@ -69,7 +69,7 @@ class CategoriesController extends Controller
      *     tags={"Categories"},
      *     summary="Create a new category",
      *     description="Create a new category.",
-     *     security={{"bearerAuth": {}}},
+     *    security={{"bearer_token":{}}},
      *
      *     @OA\RequestBody(
      *         required=true,
@@ -116,7 +116,7 @@ class CategoriesController extends Controller
      *     tags={"Categories"},
      *     summary="Get a category by ID",
      *     description="Get a category by its ID.",
-     *     security={{"bearerAuth": {}}},
+     *     security={{"bearer_token":{}}},
      *
      *     @OA\Parameter(
      *         name="id",
@@ -175,7 +175,7 @@ class CategoriesController extends Controller
      *     tags={"Categories"},
      *     summary="Update a category",
      *     description="Update an existing category by its ID.",
-     *     security={{"bearerAuth": {}}},
+     *     security={{"bearer_token":{}}},
      *
      *     @OA\Parameter(
      *         name="id",
@@ -186,11 +186,10 @@ class CategoriesController extends Controller
      *         @OA\Schema(type="integer"),
      *     ),
      *
-     *     @OA\RequestBody(
-     *         required=true,
-     *
-     *         @OA\JsonContent(),
-     *     ),
+     *    @OA\RequestBody(
+     * @OA\JsonContent(),
+     *     
+     *   ),
      *
      *     @OA\Response(
      *         response=201,
@@ -234,7 +233,7 @@ class CategoriesController extends Controller
      *     tags={"Categories"},
      *     summary="Delete a category",
      *     description="Delete a category by its ID.",
-     *     security={{"bearerAuth": {}}},
+     *    security={{"bearer_token":{}}},
      *
      *     @OA\Parameter(
      *         name="id",

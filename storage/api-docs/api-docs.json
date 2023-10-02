@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "LT XiNê  ApplicationAPI",
+        "title": "UNIVERSAL XiNê  ApplicationAPI",
         "version": "1.0.0"
     },
     "paths": {
@@ -168,7 +168,7 @@
                 },
                 "security": [
                     {
-                        "passport": []
+                        "bearer_token": []
                     }
                 ]
             },
@@ -205,7 +205,7 @@
                 },
                 "security": [
                     {
-                        "bearerAuth": []
+                        "bearer_token": []
                     }
                 ]
             }
@@ -247,7 +247,7 @@
                 },
                 "security": [
                     {
-                        "bearerAuth": []
+                        "bearer_token": []
                     }
                 ]
             },
@@ -270,7 +270,6 @@
                     }
                 ],
                 "requestBody": {
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {}
@@ -298,7 +297,7 @@
                 },
                 "security": [
                     {
-                        "bearerAuth": []
+                        "bearer_token": []
                     }
                 ]
             },
@@ -333,7 +332,7 @@
                 },
                 "security": [
                     {
-                        "bearerAuth": []
+                        "bearer_token": []
                     }
                 ]
             }
@@ -341,26 +340,12 @@
     },
     "components": {
         "securitySchemes": {
-            "passport": {
+            "bearer_token": {
                 "type": "apiKey",
-                "description": "Laravel passport oauth2 security.",
-                "in": "header",
-                "namne": "Authorization",
-                "scheme": "https",
-                "flows": {
-                    "password": {
-                        "authorizationUrl": "http://cenima.test/oauth/authorize",
-                        "tokenUrl": "http://cenima.test/oauth/token",
-                        "refreshUrl": "http://cenima.test/token/refresh",
-                        "scopes": []
-                    }
-                }
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
-    },
-    "security": [
-        {
-            "passport": []
-        }
-    ]
+    }
 }

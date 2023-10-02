@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\API\CategoriesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +24,9 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::resource('categories', CategoriesController::class);
+    Route::get('categories', [CategoriesController::class, 'index'])->middleware('can:isAdmin');
+    Route::post('categories', [CategoriesController::class, 'store']);
+    Route::get('categories/{id}', [CategoriesController::class, 'show']);
+    Route::put('categories/{id}', [CategoriesController::class, 'update']);
+    Route::delete('categories/{id}', [CategoriesController::class, 'destroy']);
 });
