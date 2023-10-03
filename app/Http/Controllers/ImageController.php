@@ -6,21 +6,21 @@ use App\Models\ImageTest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-
 class ImageController extends Controller
 {
     public function upload()
     {
         Storage::disk('s3')->put('test-upload/test.txt', 'aloalo');
+
         return view('upload');
     }
+
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
 
         if ($request->hasFile('image')) {
             $imageContents = file_get_contents($request->file('image')->getRealPath());
@@ -33,9 +33,10 @@ class ImageController extends Controller
 
             $request->merge([
                 'size' => $request->file('image')->getSize(),
-                'path' => $path
+                'path' => $path,
             ]);
             ImageTest::create($request->only('path', 'title', 'image'));
+
             return back()->with('success', 'Image Successfully Saved');
         }
     }

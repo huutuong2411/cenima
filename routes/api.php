@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\CategoriesController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\Api\CityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,17 +20,30 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+// route login tạm
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::post('reset-password', [AuthController::class, 'sendMail']);
-Route::get('reset/{token}', [AuthController::class, 'reset']);
+Route::post('forgot-password', [AuthController::class, 'sendMail']);
+Route::post('reset-password/{token}', [AuthController::class, 'reset']);
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('categories', [CategoriesController::class, 'index'])->middleware('can:isAdmin');
-    Route::post('categories', [CategoriesController::class, 'store']);
-    Route::get('categories/{id}', [CategoriesController::class, 'show']);
-    Route::put('categories/{id}', [CategoriesController::class, 'update']);
-    Route::delete('categories/{id}', [CategoriesController::class, 'destroy']);
+// Route::middleware(['auth:api'])->group(function () {
+Route::group([
+    'prefix' => '',
+    'as' => 'user.',
+], function () {
 });
 
+//Routes admin
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['auth:api', 'apiIsAdmin'],
+], function () {
+    Route::get('/cities', [CityController::class, 'index']);
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::post('/', [CategoryController::class, 'store']);
+        Route::get('/{id}', [CategoryController::class, 'show']);
+        Route::put('/{id}', [CategoryController::class, 'update']);
+        Route::delete('/{id}', [CategoryController::class, 'destroy']);
+    });
+});

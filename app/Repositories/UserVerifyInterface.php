@@ -7,5 +7,4 @@ namespace App\Repositories;
  */
 interface UserVerifyInterface extends RepositoryInterface
 {
-   
 }

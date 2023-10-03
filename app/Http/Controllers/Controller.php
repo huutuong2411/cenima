@@ -9,8 +9,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
- * 
- *      
  * @OA\Info(
  *    title="UNIVERSAL XiNê  ApplicationAPI",
  *    version="1.0.0",

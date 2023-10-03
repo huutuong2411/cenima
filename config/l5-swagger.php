@@ -208,14 +208,13 @@ return [
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
 
-
             ],
             'security' => [
                 /*
                  * Examples of Securities
                 */
                 [
-                    /*
+                /*
                     'oauth2_security_example' => [
                         'read',
                         'write'

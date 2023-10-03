@@ -187,8 +187,9 @@ class CategoriesController extends Controller
      *     ),
      *
      *    @OA\RequestBody(
+     *
      * @OA\JsonContent(),
-     *     
+     *
      *   ),
      *
      *     @OA\Response(
