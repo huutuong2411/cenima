@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\TheaterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,14 @@ Route::group([
     'middleware' => ['auth:api', 'apiIsAdmin'],
 ], function () {
     Route::get('/cities', [CityController::class, 'index']);
+    Route::group(['prefix' => 'theaters'], function () {
+        Route::get('/', [TheaterController::class, 'index']);
+        Route::post('/', [TheaterController::class, 'store']);
+        Route::get('/{id}', [TheaterController::class, 'show']);
+        Route::put('/{id}', [TheaterController::class, 'update']);
+        Route::delete('/{id}', [TheaterController::class, 'destroy']);
+    });
+
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index']);
         Route::post('/', [CategoryController::class, 'store']);

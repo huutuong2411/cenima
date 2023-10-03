@@ -18,7 +18,7 @@ class TheatersService
 
     public function getAll()
     {
-        return $this->theatersRepository->all();
+        return $this->theatersRepository->all()->load('Cities');
     }
 
     public function createTheater($data)

@@ -8,7 +8,7 @@ use App\Http\Resources\Categories as CategoriesResource;
 use App\Services\CategoriesService;
 use Illuminate\Http\Response;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     protected CategoriesService $categoriesService;
 
@@ -258,7 +258,7 @@ class CategoriesController extends Controller
         $this->categoriesService->deleteCategory($id);
         $arr = [
             'status' => true,
-            'message' => 'Sản phẩm đã được xóa',
+            'message' => 'Danh muc đã được xóa',
             'data' => [],
         ];
 
