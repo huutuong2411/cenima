@@ -4,7 +4,7 @@
 
 ### Clone source code
 Make a folder on your local and clone source on your local
-- ``` git clone https://github.com/huutuong2411/cenima.git```
+- ``` git clone https://github.com/huutuong2411/cinema.git```
 
 ### Install source
 - `cd to root folder`
